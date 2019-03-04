@@ -10,8 +10,10 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 void PrintSomething(const std::string& s, void* histance)
 {
+
+
     // Register the window class.
-    const char CLASS_NAME[] = "Sample Window Class";
+    const char CLASS_NAME[] = "Window claaaazz";
 
     WNDCLASS wc = {};
     auto hist = GetModuleHandle(NULL);
@@ -27,7 +29,7 @@ void PrintSomething(const std::string& s, void* histance)
     HWND hwnd = CreateWindowEx(
         0,                              // Optional window styles.
         CLASS_NAME,                     // Window class
-        "Learn to Program Windows",    // Window text
+        "LMAO",    // Window text
         WS_OVERLAPPEDWINDOW,            // Window style
 
                                         // Size and position
