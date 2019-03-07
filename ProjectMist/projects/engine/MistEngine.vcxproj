@@ -84,26 +84,32 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)bin/</OutDir>
-    <IntDir>$(SolutionDir)intermediate/$(ProjectName)/</IntDir>
-    <LibraryPath>$(SolutionDir)bin;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)external/include;$(ProjectDir)code;$(IncludePath)</IncludePath>
-    <SourcePath>$(ProjectDir)code;$(SourcePath)</SourcePath>
+    <OutDir>$(SolutionDir)bin</OutDir>
+    <IntDir>$(SolutionDir)\intermediate\$(ProjectName)</IntDir>
+    <LibraryPath>$(SolutionDir)bin\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)external\include\;$(ProjectDir)code\;$(IncludePath)</IncludePath>
+    <SourcePath>$(ProjectDir)code\;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)bin</OutDir>
-    <IntDir>$(SolutionDir)/intermediate/$(ProjectName)</IntDir>
-    <LibraryPath>$(SolutionDir)bin;$(LibraryPath)</LibraryPath>
+    <IntDir>$(SolutionDir)\intermediate\$(ProjectName)</IntDir>
+    <LibraryPath>$(SolutionDir)bin\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)external\include\;$(ProjectDir)code\;$(IncludePath)</IncludePath>
+    <SourcePath>$(ProjectDir)code\;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)bin</OutDir>
-    <IntDir>$(SolutionDir)/intermediate/$(ProjectName)</IntDir>
-    <LibraryPath>$(SolutionDir)bin;$(LibraryPath)</LibraryPath>
+    <IntDir>$(SolutionDir)\intermediate\$(ProjectName)</IntDir>
+    <LibraryPath>$(SolutionDir)bin\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)external\include\;$(ProjectDir)code\;$(IncludePath)</IncludePath>
+    <SourcePath>$(ProjectDir)code\;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin</OutDir>
-    <IntDir>$(SolutionDir)/intermediate/$(ProjectName)</IntDir>
-    <LibraryPath>$(SolutionDir)bin;$(LibraryPath)</LibraryPath>
+    <IntDir>$(SolutionDir)\intermediate\$(ProjectName)</IntDir>
+    <LibraryPath>$(SolutionDir)bin\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)external\include\;$(ProjectDir)code\;$(IncludePath)</IncludePath>
+    <SourcePath>$(ProjectDir)code\;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
