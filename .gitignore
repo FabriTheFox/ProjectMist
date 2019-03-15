@@ -1,6 +1,3 @@
-*.html
-*.tlog
-*.idb
-*.exp
-*.ipch
-*.db
+bin
+intermediate
+.vs
