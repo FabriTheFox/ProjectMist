@@ -15,5 +15,14 @@ int CALLBACK WinMain(
 ){
 
     PrintSomething("Hello from game", hInstance);
+
     auto& t = ME::Terminal::GetInstance();
+
+    //auto& i = t.getInt();
+
+    //t.GetWindow().SetWindowName("Liya");
+    auto& w = t.GetWindow();
+    w.CreateTheWindow();
+
+    return 0;
 }

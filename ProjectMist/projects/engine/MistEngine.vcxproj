@@ -20,12 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\Engine\MistEngine.cpp" />
+    <ClCompile Include="code\EventSystem\EventSystem.cpp" />
     <ClCompile Include="code\Terminal\Terminal.cpp" />
     <ClCompile Include="code\Terminal\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Engine\MistEngine.h" />
     <ClInclude Include="code\Engine\Singleton.h" />
+    <ClInclude Include="code\EventSystem\EventSystem.h" />
     <ClInclude Include="code\Libraries\Containers.h" />
     <ClInclude Include="code\Libraries\Math.h" />
     <ClInclude Include="code\Libraries\Memory.h" />
@@ -84,29 +86,29 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)bin</OutDir>
-    <IntDir>$(SolutionDir)\intermediate\$(ProjectName)</IntDir>
+    <OutDir>$(SolutionDir)bin\</OutDir>
+    <IntDir>$(SolutionDir)\intermediate\$(ProjectName)\</IntDir>
     <LibraryPath>$(SolutionDir)bin\;$(LibraryPath)</LibraryPath>
     <IncludePath>$(SolutionDir)external\include\;$(ProjectDir)code\;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir)code\;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)bin</OutDir>
-    <IntDir>$(SolutionDir)\intermediate\$(ProjectName)</IntDir>
+    <OutDir>$(SolutionDir)bin\</OutDir>
+    <IntDir>$(SolutionDir)\intermediate\$(ProjectName)\</IntDir>
     <LibraryPath>$(SolutionDir)bin\;$(LibraryPath)</LibraryPath>
     <IncludePath>$(SolutionDir)external\include\;$(ProjectDir)code\;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir)code\;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)bin</OutDir>
-    <IntDir>$(SolutionDir)\intermediate\$(ProjectName)</IntDir>
+    <OutDir>$(SolutionDir)bin\</OutDir>
+    <IntDir>$(SolutionDir)\intermediate\$(ProjectName)\</IntDir>
     <LibraryPath>$(SolutionDir)bin\;$(LibraryPath)</LibraryPath>
     <IncludePath>$(SolutionDir)external\include\;$(ProjectDir)code\;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir)code\;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)bin</OutDir>
-    <IntDir>$(SolutionDir)\intermediate\$(ProjectName)</IntDir>
+    <OutDir>$(SolutionDir)bin\</OutDir>
+    <IntDir>$(SolutionDir)\intermediate\$(ProjectName)\</IntDir>
     <LibraryPath>$(SolutionDir)bin\;$(LibraryPath)</LibraryPath>
     <IncludePath>$(SolutionDir)external\include\;$(ProjectDir)code\;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir)code\;$(SourcePath)</SourcePath>

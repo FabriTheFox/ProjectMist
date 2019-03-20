@@ -4,6 +4,7 @@
     <ClCompile Include="code\Engine\MistEngine.cpp" />
     <ClCompile Include="code\Terminal\Terminal.cpp" />
     <ClCompile Include="code\Terminal\Window.cpp" />
+    <ClCompile Include="code\EventSystem\EventSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Engine\MistEngine.h" />
@@ -13,5 +14,6 @@
     <ClInclude Include="code\Terminal\Terminal.h" />
     <ClInclude Include="code\Engine\Singleton.h" />
     <ClInclude Include="code\Terminal\Window.h" />
+    <ClInclude Include="code\EventSystem\EventSystem.h" />
   </ItemGroup>
 </Project>

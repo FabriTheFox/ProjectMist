@@ -3,13 +3,18 @@
 #include <Engine/MistEngine.h>
 #include <Engine/Singleton.h>
 
+#include "Window.h"
+
 namespace ME
 {
-    MISTENGINE_DLL class Terminal
+    class Terminal
     {
+        SINGLETON_DEFCTOR(Terminal);
     public:
-        SINGLETON_NO_CTOR(Terminal);
+
+        MISTENGINE_DLL ME::Window& GetWindow();
 
     private:
+        Window m_Window;
     };
 }

@@ -4,10 +4,12 @@
 	public:																						\
 	thistype(const thistype&) = delete;															\
 	thistype& operator= (const thistype&) = delete;												\
-	thistype() = default; private:
+	private:
 
-#define SINGLETON_NO_CTOR(thistype)                                                             \
+#define SINGLETON_DEFCTOR(thistype)                                                             \
     public:                                                                                     \
-    static const thistype& GetInstance() {                                                      \
+    static thistype& GetInstance() {                                                            \
         static thistype instance; return instance; }                                            \
-    NON_COPYABLE(thistype)
+    NON_COPYABLE(thistype)                                                                      \
+    private:                                                                                    \
+    thistype() = default;                                                                           
