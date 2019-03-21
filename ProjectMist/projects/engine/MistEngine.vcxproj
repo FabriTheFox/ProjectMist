@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="code\Engine\MistEngine.cpp" />
     <ClCompile Include="code\EventSystem\EventSystem.cpp" />
+    <ClCompile Include="code\RTTI\RTTI.cpp" />
     <ClCompile Include="code\Terminal\Terminal.cpp" />
     <ClCompile Include="code\Terminal\Window.cpp" />
   </ItemGroup>
@@ -31,6 +32,8 @@
     <ClInclude Include="code\Libraries\Containers.h" />
     <ClInclude Include="code\Libraries\Math.h" />
     <ClInclude Include="code\Libraries\Memory.h" />
+    <ClInclude Include="code\RTTI\Dynamic.h" />
+    <ClInclude Include="code\RTTI\RTTI.h" />
     <ClInclude Include="code\Terminal\Terminal.h" />
     <ClInclude Include="code\Terminal\Window.h" />
   </ItemGroup>

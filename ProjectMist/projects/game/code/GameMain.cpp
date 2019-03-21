@@ -1,5 +1,6 @@
 #include <Engine/MistEngine.h>
 #include <Terminal/Terminal.h>
+#include <EventSystem/EventSystem.h>
 
 #include <Windows.h>
 
@@ -7,22 +8,37 @@
 
 #include <vector>
 
-int CALLBACK WinMain(
-    _In_ HINSTANCE hInstance,
-    _In_ HINSTANCE hPrevInstance,
-    _In_ LPSTR     lpCmdLine,
-    _In_ int       nCmdShow
-){
+class MyEvent : public ME::Event
+{
+public:
+    int MyData;
+};
 
-    PrintSomething("Hello from game", hInstance);
+class MyListener : public ME::EventListener
+{
+public:
+    virtual void OnEvent(const MyEvent& ev)
+    {
+        std::cout << "LMAO" << std::endl;
+    }
+};
 
-    auto& t = ME::Terminal::GetInstance();
+int main()
+{
+
+    MyListener lis;
+    ME::EventSystem::GetInstance().m_Listeners = &lis;
+
+    MyEvent EV;
+    EV.MyData = 89;
+
+    ME::EventSystem::GetInstance().DispatchEvent<MyEvent>(EV);
 
     //auto& i = t.getInt();
 
     //t.GetWindow().SetWindowName("Liya");
-    auto& w = t.GetWindow();
-    w.CreateTheWindow();
+    //auto& w = t.GetWindow();
+    //w.CreateTheWindow();
 
     return 0;
 }

@@ -7,22 +7,31 @@
 
 namespace ME
 {
-    class Event
+    class MISTENGINE_DLL Event
     {
 
     };
 
-    class EventListener
+    class MISTENGINE_DLL EventDispatcher
     {
-        template <typename T>
-        virtual void OnEvent(const T& ev) {}
+    public:
+        virtual void OnEvent(Event* ev) 
+        {
+            OnEvent();
+        }
     };
 
-    class EventSystem
+    class MISTENGINE_DLL EventSystem
     {
         SINGLETON_DEFCTOR(EventSystem);
     public:
 
-        ME::Map<Event, ME::Vector<ME::WPtr<EventListener>>> m_Listeners;
+        template <typename T >
+        void DispatchEvent(const T& event)
+        {
+            m_Listeners->OnEvent<T>(event);
+        }
+
+        UnorderedMap<>* m_Listeners;
     };
 }
