@@ -23,7 +23,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         int xPos = GET_X_LPARAM(lParam);
         int yPos = GET_Y_LPARAM(lParam);
 
-        std::cout << "Right pressed: " << xPos << ", " << yPos << std::endl;
+        std::cout << "Left lifted: " << xPos << ", " << yPos << std::endl;
         break;
     }
 

@@ -5,10 +5,8 @@
     <ClCompile Include="code\Terminal\Terminal.cpp" />
     <ClCompile Include="code\Terminal\Window.cpp" />
     <ClCompile Include="code\EventSystem\EventSystem.cpp" />
-    <ClCompile Include="code\RTTI\RTTI.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="code\Engine\MistEngine.h" />
     <ClInclude Include="code\Libraries\Containers.h" />
     <ClInclude Include="code\Libraries\Math.h" />
     <ClInclude Include="code\Libraries\Memory.h" />
@@ -17,6 +15,6 @@
     <ClInclude Include="code\Terminal\Window.h" />
     <ClInclude Include="code\EventSystem\EventSystem.h" />
     <ClInclude Include="code\RTTI\RTTI.h" />
-    <ClInclude Include="code\RTTI\Dynamic.h" />
+    <ClInclude Include="code\Engine\MistEngineDefs.h" />
   </ItemGroup>
 </Project>

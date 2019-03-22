@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Engine/MistEngine.h>
+#include <Engine/MistEngineDefs.h>
 #include <Libraries/Containers.h>
 
 namespace ME
@@ -12,10 +12,10 @@ namespace ME
 
         MISTENGINE_DLL void CreateTheWindow();
 
-        void SetWindowName(const String& name);
-        const String& GetWindowName();
+        MISTENGINE_DLL void SetWindowName(const String& name);
+        MISTENGINE_DLL const String& GetWindowName();
 
-        void ProcessWindowMessages();
+        MISTENGINE_DLL void ProcessWindowMessages();
 
     private:
         String m_WindowName;

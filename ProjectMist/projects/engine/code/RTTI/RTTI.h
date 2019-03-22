@@ -2,6 +2,15 @@
 
 #include <Libraries/Containers.h>
 
+#define RTTI_DECLARATION(thistype)																                    \
+	public:																						                    \
+	virtual const ME::RTTI& GetRTTI() const {return sm_RTTI;}									            \
+	static const ME::RTTI& sGetRTTI() {return sm_RTTI;}											                    \
+	private: static const ME::RTTI& sm_RTTI;															            \
+
+#define RTTI_IMPLEMENTATION(thistype)															                    \
+	const ME::RTTI& thistype::sm_RTTI = ME::RTTISystem::RegisterRTTI<thistype>();	                                \
+
 namespace ME
 {
     class RTTI
@@ -9,11 +18,11 @@ namespace ME
     public:
         using Hash = size_t;
         RTTI(const std::string& name = "", Hash type = 0) :
-            mTypename(name), mTypehash(type) {}
-        bool operator< (const RTTI& rhs) const { return mTypehash < rhs.mTypehash; }
+            m_Typename(name), m_Typehash(type) {}
+        bool operator< (const RTTI& rhs) const { return m_Typehash < rhs.m_Typehash; }
 
-        String mTypename;
-        Hash mTypehash = 0;
+        String m_Typename;
+        Hash m_Typehash = 0;
     };
 
     class RTTISystem
@@ -25,7 +34,7 @@ namespace ME
             auto hash = typeid(T).hash_code();
             auto str = typeid(T).name();
             auto& rtti = GetRTTIsByName()[str];
-            rtti = { str, hash};
+            rtti = { str, hash };
             GetRTTIsByHash()[hash] = rtti;
             return rtti;
         }
@@ -40,11 +49,10 @@ namespace ME
             return GetRTTIsByHash().find(hash)->second;
         }
 
-    private:
         static UnorderedMap<String, RTTI>& GetRTTIsByName()
         {
             static UnorderedMap<String, RTTI> map;
-            return map;
+            return map; 
         }
 
         static UnorderedMap<RTTI::Hash, RTTI>& GetRTTIsByHash()
@@ -53,13 +61,12 @@ namespace ME
             return map;
         }
     };
+
+    class IDynamic
+    {
+    public:
+        virtual const RTTI& GetRTTI() const = 0;
+    protected:
+
+    };
 }
-
-#define RTTI_DECLARATION(thistype)																                    \
-	public:																						                    \
-	virtual FTF_RTTI& GetRTTI() const override {return smRTTI;}									                    \
-	static const FTF_RTTI& sGetRTTI() {return smRTTI;}											                    \
-	private: static FTF_RTTI& smRTTI;															                    \
-
-#define RTTI_IMPLEMENTATION(thistype)															                    \
-	FTF_RTTI& thistype::smRTTI = FTF_RTTISystem::RegisterRTTI<thistype>(thistype::CreateBase, thistype::CreateRP);	\
