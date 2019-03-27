@@ -24,26 +24,30 @@ namespace ME
         SINGLETON_DEFCTOR(EventSystem);
 
     public:
-        template <typename Ev, typename Obj>
-        void RegisterListener(void (Obj::*lisfunc)(const Ev&), Obj* instance)
+        template <typename Ev>
+        void RegisterListener(std::function<void(const Ev&)> listener)
         {
             auto& disp = m_Dispatchers[Ev::sGetRTTI()];
-            disp.push_back(std::make_unique<EventDispatcher<Ev, Obj>>(lisfunc, instance));
+            disp.push_back(std::make_unique<EventDispatcher<Ev>>(listener));
         }
 
         template <typename Ev>
-        void UnRegisterListener(void* lisfunc, void* instance = nullptr)
+        void UnRegisterListener(std::function<void(const Ev&)> listener)
         {
-            auto& itr = m_Dispatchers.find(Ev::sGetRTTI());
+            auto itr = m_Dispatchers.find(Ev::sGetRTTI());
             if (itr == m_Dispatchers.end())
                 return;
+            const auto& rtti = EventDispatcher<Ev>::sGetRTTI();
             for (auto& d : itr->second)
             {
-                if (d->IsSameAs(lisfunc, instance))
+                if (d->GetRTTI() == rtti)
                 {
-                    d = itr->second.back();
-                    itr->second.pop_back();
-                    return;
+                    if (((EventDispatcher<Ev>*)d.get())->m_Function.target_type() == listener.target_type())
+                    {
+                        d = std::move(itr->second.back());
+                        itr->second.pop_back();
+                        return;
+                    }
                 }
             }
         }
@@ -61,30 +65,25 @@ namespace ME
     private:
         class IEventDispatcher
         {
+            RTTI_DECLARATION(IEventDispatcher);
         public:
             virtual void Dispatch(Event* theevent) = 0;
-            virtual void* GetObjectInstance() const = 0;
-            virtual void* GetFunctionPtr() const = 0;
-            bool IsSameAs(void* funct, void* obj) { return GetObjectInstance() == obj && GetFunctionPtr() == funct; }
         };
 
-        template<typename Ev, typename Obj>
+        template<typename Ev>
         class EventDispatcher : public IEventDispatcher
         {
+            RTTI_DECLARATION(EventDispatcher);
         public:
-            typedef void (Obj::*ListenerFunc)(const Ev&);
-            EventDispatcher(void (Obj::*lisfunc)(const Ev&), Obj* instance) : m_Function(lisfunc) {}
-
-            void* GetObjectInstance() const override final { return m_Instance; }
-            virtual void* GetFunctionPtr() const override final { return m_Function; }
+            typedef std::function<void(const Ev&)> ListenerFunc;
+            EventDispatcher(ListenerFunc listener) : m_Function(listener) {}
 
             void Dispatch(Event* theevent) override final 
             { 
-                (m_Instance->*m_Function)(*((Ev*)theevent));
+                m_Function(*((Ev*)theevent));
             }
 
-        private:
-            Obj* m_Instance;
+        //private:
             ListenerFunc m_Function;
         };
 
@@ -93,4 +92,8 @@ namespace ME
     };
 
     RTTI_IMPLEMENTATION(EventSystem);
+    RTTI_IMPLEMENTATION(EventSystem::IEventDispatcher);
+
+    template <typename Ev>
+    RTTI_IMPLEMENTATION(EventSystem::EventDispatcher<Ev>);
 }

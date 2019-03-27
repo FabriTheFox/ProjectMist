@@ -41,14 +41,27 @@ int main()
     auto& evs = ME::EventSystem::GetInstance();
     ListeningClass ExplosionListener;
 
-    evs.RegisterListener<ExplosionEvent, ListeningClass>(&ListeningClass::OnExplosionEvent, &ExplosionListener);
-    //evs.RegisterListener<ExplosionEvent>(std::bind(&ListeningClass::OnExplosionEvent2, ExplosionListener, std::placeholders::_1));
+    evs.RegisterListener<ExplosionEvent>(std::bind(&ListeningClass::OnExplosionEvent, ExplosionListener, std::placeholders::_1));
+    evs.RegisterListener<ExplosionEvent>(std::bind(&ListeningClass::OnExplosionEvent2, ExplosionListener, std::placeholders::_1));
 
     ExplosionEvent explosion;
     explosion.name = "BOOM";
 
+    evs.UnRegisterListener<ExplosionEvent>(std::bind(&ListeningClass::OnExplosionEvent2, ExplosionListener, std::placeholders::_1));
+
     evs.DispatchEvent(explosion);
     evs.DispatchEvent(explosion);
+
+    std::function<void(const ExplosionEvent&)> l = std::bind(&ListeningClass::OnExplosionEvent, ExplosionListener, std::placeholders::_1);
+    std::function<void(const ExplosionEvent&)> l2 = std::bind(&ListeningClass::OnExplosionEvent2, ExplosionListener, std::placeholders::_1);
+
+    auto n = l.target_type().hash_code();
+    auto n2 = l2.target_type().hash_code();
+
+    if (n == n2)
+    {
+        std::cout << "Same";
+    }
 
     while (true)
     {

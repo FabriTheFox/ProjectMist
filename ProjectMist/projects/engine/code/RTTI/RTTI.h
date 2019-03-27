@@ -20,6 +20,7 @@ namespace ME
         RTTI(const std::string& name = "", Hash type = 0) :
             m_Typename(name), m_Typehash(type) {}
         bool operator< (const RTTI& rhs) const { return m_Typehash < rhs.m_Typehash; }
+        bool operator== (const RTTI& rhs) const { return m_Typehash == rhs.m_Typehash; }
 
         String m_Typename;
         Hash m_Typehash = 0;
