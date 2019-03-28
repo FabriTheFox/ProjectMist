@@ -4,7 +4,7 @@
 
 #define RTTI_DECLARATION(thistype)																                    \
 	public:																						                    \
-	virtual const ME::RTTI& GetRTTI() const {return sm_RTTI;}									            \
+	virtual const ME::RTTI& GetRTTI() const {return sm_RTTI;}									                    \
 	static const ME::RTTI& sGetRTTI() {return sm_RTTI;}											                    \
 	private: static const ME::RTTI& sm_RTTI;															            \
 

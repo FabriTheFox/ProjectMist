@@ -24,25 +24,28 @@ namespace ME
         SINGLETON_DEFCTOR(EventSystem);
 
     public:
-        template <typename Ev>
-        void RegisterListener(std::function<void(const Ev&)> listener)
+        
+
+        template <typename Ev, typename Obj>
+        void RegisterListener(void (Obj::*listener)(const Ev&), Obj* instance)
         {
             auto& disp = m_Dispatchers[Ev::sGetRTTI()];
-            disp.push_back(std::make_unique<EventDispatcher<Ev>>(listener));
+            disp.push_back(std::make_unique<EventDispatcherMember<Ev, Obj>>(listener, instance));
         }
 
-        template <typename Ev>
-        void UnRegisterListener(std::function<void(const Ev&)> listener)
+        template <typename Ev, typename Obj>
+        void UnRegisterListener(void (Obj::*listener)(const Ev&), Obj* instance)
         {
             auto itr = m_Dispatchers.find(Ev::sGetRTTI());
             if (itr == m_Dispatchers.end())
                 return;
-            const auto& rtti = EventDispatcher<Ev>::sGetRTTI();
+            const auto& rtti = EventDispatcherMember<Ev, Obj>::sGetRTTI();
             for (auto& d : itr->second)
             {
                 if (d->GetRTTI() == rtti)
                 {
-                    if (((EventDispatcher<Ev>*)d.get())->m_Function.target_type() == listener.target_type())
+                    auto& disp = *((EventDispatcherMember<Ev, Obj>*)d.get());
+                    if (disp.m_Function == listener && disp.m_Instance == instance)
                     {
                         d = std::move(itr->second.back());
                         itr->second.pop_back();
@@ -70,20 +73,28 @@ namespace ME
             virtual void Dispatch(Event* theevent) = 0;
         };
 
-        template<typename Ev>
+        template <typename Ev, typename Obj>
+        class EventDispatcherMember : public IEventDispatcher
+        {
+            RTTI_DECLARATION(EventDispatcherMember);
+        public:
+            typedef void (Obj::*ListenerFunc)(const Ev&);
+            EventDispatcherMember(ListenerFunc listener, Obj* instance) : m_Function(listener), m_Instance(instance) {}
+            void Dispatch(Event* theevent) override final { (m_Instance->*m_Function)(*((Ev*)theevent)); }
+
+            Obj* m_Instance;
+            ListenerFunc m_Function;
+        };
+
+        template <typename Ev>
         class EventDispatcher : public IEventDispatcher
         {
             RTTI_DECLARATION(EventDispatcher);
         public:
-            typedef std::function<void(const Ev&)> ListenerFunc;
+            typedef void (*ListenerFunc)(const Ev&);
             EventDispatcher(ListenerFunc listener) : m_Function(listener) {}
+            void Dispatch(Event* theevent) override final { (m_Function)(*((Ev*)theevent)); }
 
-            void Dispatch(Event* theevent) override final 
-            { 
-                m_Function(*((Ev*)theevent));
-            }
-
-        //private:
             ListenerFunc m_Function;
         };
 
@@ -94,6 +105,6 @@ namespace ME
     RTTI_IMPLEMENTATION(EventSystem);
     RTTI_IMPLEMENTATION(EventSystem::IEventDispatcher);
 
-    template <typename Ev>
-    RTTI_IMPLEMENTATION(EventSystem::EventDispatcher<Ev>);
+    template <typename Ev, typename Obj>
+    const ME::RTTI& EventSystem::EventDispatcherMember<Ev, Obj>::sm_RTTI = ME::RTTISystem::RegisterRTTI<EventSystem::EventDispatcherMember<Ev, Obj>>();
 }
