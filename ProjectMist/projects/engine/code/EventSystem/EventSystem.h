@@ -24,13 +24,18 @@ namespace ME
         SINGLETON_DEFCTOR(EventSystem);
 
     public:
-        
-
         template <typename Ev, typename Obj>
         void RegisterListener(void (Obj::*listener)(const Ev&), Obj* instance)
         {
             auto& disp = m_Dispatchers[Ev::sGetRTTI()];
             disp.push_back(std::make_unique<EventDispatcherMember<Ev, Obj>>(listener, instance));
+        }
+
+        template <typename Ev>
+        void RegisterListener(void (*listener)(const Ev&))
+        {
+            auto& disp = m_Dispatchers[Ev::sGetRTTI()];
+            disp.push_back(std::make_unique<EventDispatcher<Ev>>(listener));
         }
 
         template <typename Ev, typename Obj>
@@ -53,6 +58,45 @@ namespace ME
                     }
                 }
             }
+        }
+
+        template <typename Ev>
+        void UnRegisterListener(void (*listener)(const Ev&))
+        {
+            auto itr = m_Dispatchers.find(Ev::sGetRTTI());
+            if (itr == m_Dispatchers.end())
+                return;
+            const auto& rtti = EventDispatcher<Ev>::sGetRTTI();
+            for (auto& d : itr->second)
+            {
+                if (d->GetRTTI() == rtti)
+                {
+                    auto& disp = *((EventDispatcher<Ev>*)d.get());
+                    if (disp.m_Function == listener)
+                    {
+                        d = std::move(itr->second.back());
+                        itr->second.pop_back();
+                        return;
+                    }
+                }
+            }
+        }
+
+        template <typename Ev>
+        void UnRegisterAllListenersOfEvent()
+        {
+            auto itr = m_Dispatchers.find(Ev::sGetRTTI());
+            if (itr == m_Dispatchers.end())
+                return;
+            itr->second.clear();
+        }
+
+        void UnRegisterAllListenersOfEvent(const RTTI& eventype)
+        {
+            auto itr = m_Dispatchers.find(eventype);
+            if (itr == m_Dispatchers.end())
+                return;
+            itr->second.clear();
         }
 
         template <typename Ev>
@@ -107,4 +151,7 @@ namespace ME
 
     template <typename Ev, typename Obj>
     const ME::RTTI& EventSystem::EventDispatcherMember<Ev, Obj>::sm_RTTI = ME::RTTISystem::RegisterRTTI<EventSystem::EventDispatcherMember<Ev, Obj>>();
+
+    template <typename Ev>
+    const ME::RTTI& EventSystem::EventDispatcher<Ev>::sm_RTTI = ME::RTTISystem::RegisterRTTI<EventSystem::EventDispatcher<Ev>>();
 }

@@ -31,6 +31,11 @@ public:
     }
 };
 
+void globalOnExplosion(const ExplosionEvent& explo)
+{
+    std::cout << explo.name << "(global)" << std::endl;
+}
+
 int main()
 {
     auto& t = ME::Terminal::GetInstance();
@@ -47,10 +52,15 @@ int main()
     evs.RegisterListener(&ListeningClass::OnExplosionEvent, &ExplosionListener);
     evs.RegisterListener(&ListeningClass::OnExplosionEvent2, &ExplosionListener);
 
+    evs.RegisterListener(&globalOnExplosion);
+
     ExplosionEvent explosion;
     explosion.name = "BOOM";
 
-    evs.UnRegisterListener<ExplosionEvent>(&ListeningClass::OnExplosionEvent, &ExplosionListener);
+    //evs.UnRegisterListener<ExplosionEvent>(&ListeningClass::OnExplosionEvent, &ExplosionListener);
+    //evs.UnRegisterListener(&globalOnExplosion);
+
+    evs.UnRegisterAllListenersOfEvent(explosion.GetRTTI());
 
     evs.DispatchEvent(explosion);
     evs.DispatchEvent(explosion);
