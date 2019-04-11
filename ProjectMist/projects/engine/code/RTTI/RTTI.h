@@ -8,8 +8,24 @@
 	static const ME::RTTI& sGetRTTI() {return sm_RTTI;}											                    \
 	private: static const ME::RTTI& sm_RTTI;															            \
 
-#define RTTI_IMPLEMENTATION(thistype)															                    \
-	const ME::RTTI& thistype::sm_RTTI = ME::RTTISystem::RegisterRTTI<thistype>();	                                \
+#define RTTI_IMPLEMENTATION(thistype)													\
+	const ME::RTTI& thistype::sm_RTTI = ME::RTTISystem::RegisterRTTI<thistype>();	    \
+
+#define RTTI_IMPLEMENTATION_TEMPLATE_1(thistype, t0)                                    \
+        template <typename t0>                                                          \
+        const RTTI& thistype<t0>::sm_RTTI = RTTISystem::RegisterRTTI<thistype<t0>>();   \
+
+#define RTTI_IMPLEMENTATION_TEMPLATE_2(thistype, t0, t1)                                        \
+        template <typename t0, typename t1>                                                     \
+        const RTTI& thistype<t0, t1>::sm_RTTI = RTTISystem::RegisterRTTI<thistype<t0, t1>>();   \
+
+#define RTTI_IMPLEMENTATION_TEMPLATE_3(thistype, t0, t1, t2)                                            \
+        template <typename t0, typename t1, typename t2>                                                \
+        const RTTI& thistype<t0, t1, t2>::sm_RTTI = RTTISystem::RegisterRTTI<thistype<t0, t1, t2>>();   \
+
+#define GET_MACRO(_1, _2, _3, NAME, ...) NAME
+#define EXPAND(x) x
+#define RTTI_IMPLEMENTATION_TEMPLATE(thistype, ...) EXPAND(GET_MACRO(__VA_ARGS__, RTTI_IMPLEMENTATION_TEMPLATE_3, RTTI_IMPLEMENTATION_TEMPLATE_2, RTTI_IMPLEMENTATION_TEMPLATE_1)(thistype, __VA_ARGS__))
 
 namespace ME
 {

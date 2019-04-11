@@ -44,23 +44,27 @@ int main()
     w.CreateTheWindow();
 
     auto& evs = ME::EventSystem::GetInstance();
-    ListeningClass ExplosionListener;
+    ME::Ptr<ListeningClass> ExplosionListener = std::make_shared<ListeningClass>();
 
     //evs.RegisterListener<ExplosionEvent>(std::bind(&ListeningClass::OnExplosionEvent, ExplosionListener, std::placeholders::_1));
     //evs.RegisterListener<ExplosionEvent>(std::bind(&ListeningClass::OnExplosionEvent2, ExplosionListener, std::placeholders::_1));
 
-    evs.RegisterListener(&ListeningClass::OnExplosionEvent, &ExplosionListener);
-    evs.RegisterListener(&ListeningClass::OnExplosionEvent2, &ExplosionListener);
+    ME::WPtr<ListeningClass> lis = ExplosionListener;
 
-    evs.RegisterListener(&globalOnExplosion);
+    evs.RegisterListener(&ListeningClass::OnExplosionEvent, lis);
+    evs.RegisterListener(&ListeningClass::OnExplosionEvent2, lis);
+
+    //evs.RegisterListener(&globalOnExplosion);
 
     ExplosionEvent explosion;
     explosion.name = "BOOM";
 
+    //evs.UnRegisterListener(&ListeningClass::OnExplosionEvent, lis);
+
     //evs.UnRegisterListener<ExplosionEvent>(&ListeningClass::OnExplosionEvent, &ExplosionListener);
     //evs.UnRegisterListener(&globalOnExplosion);
 
-    evs.UnRegisterAllListenersOfEvent(explosion.GetRTTI());
+    //evs.UnRegisterAllListenersOfEvent(explosion.GetRTTI());
 
     evs.DispatchEvent(explosion);
     evs.DispatchEvent(explosion);
