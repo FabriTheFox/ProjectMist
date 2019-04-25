@@ -8,33 +8,7 @@
 
 #include <vector>
 
-class ExplosionEvent : public ME::Event
-{
-    RTTI_DECLARATION(ExplosionEvent)
-public:
-    ME::String name;
-};
-
-RTTI_IMPLEMENTATION(ExplosionEvent)
-
-class ListeningClass
-{
-public:
-    void OnExplosionEvent(const ExplosionEvent& explo)
-    {
-        std::cout << explo.name << std::endl;
-    }
-
-    void OnExplosionEvent2(const ExplosionEvent& explo)
-    {
-        std::cout << explo.name << "(again)" << std::endl;
-    }
-};
-
-void globalOnExplosion(const ExplosionEvent& explo)
-{
-    std::cout << explo.name << "(global)" << std::endl;
-}
+#include "TestEvents.h"
 
 int main()
 {
@@ -43,31 +17,7 @@ int main()
     auto& w = t.GetWindow();
     w.CreateTheWindow();
 
-    auto& evs = ME::EventSystem::GetInstance();
-    ME::Ptr<ListeningClass> ExplosionListener = std::make_shared<ListeningClass>();
-
-    //evs.RegisterListener<ExplosionEvent>(std::bind(&ListeningClass::OnExplosionEvent, ExplosionListener, std::placeholders::_1));
-    //evs.RegisterListener<ExplosionEvent>(std::bind(&ListeningClass::OnExplosionEvent2, ExplosionListener, std::placeholders::_1));
-
-    ME::WPtr<ListeningClass> lis = ExplosionListener;
-
-    evs.RegisterListener(&ListeningClass::OnExplosionEvent, lis);
-    evs.RegisterListener(&ListeningClass::OnExplosionEvent2, lis);
-
-    //evs.RegisterListener(&globalOnExplosion);
-
-    ExplosionEvent explosion;
-    explosion.name = "BOOM";
-
-    //evs.UnRegisterListener(&ListeningClass::OnExplosionEvent, lis);
-
-    //evs.UnRegisterListener<ExplosionEvent>(&ListeningClass::OnExplosionEvent, &ExplosionListener);
-    //evs.UnRegisterListener(&globalOnExplosion);
-
-    //evs.UnRegisterAllListenersOfEvent(explosion.GetRTTI());
-
-    evs.DispatchEvent(explosion);
-    evs.DispatchEvent(explosion);
+    TestEvents();
 
     while (true)
     {

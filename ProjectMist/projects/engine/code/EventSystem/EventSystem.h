@@ -129,7 +129,7 @@ namespace ME
         }
 
         template <typename Ev>
-        void DispatchEvent(const Ev& theevent)
+        void DispatchEvent(const Ev& theevent) const
         {
             auto itr = m_Dispatchers.find(Ev::sGetRTTI());
             if (itr == m_Dispatchers.end())
@@ -155,8 +155,8 @@ namespace ME
         {
             RTTI_DECLARATION(IEventDispatcher);
         public:
-            virtual bool Dispatch(Event* theevent) = 0;
-            virtual bool Expired() { return false; }
+            virtual bool Dispatch(Event* theevent) const = 0;
+            virtual bool Expired() const { return false; }
         };
 
         template <typename Ev, typename Obj>
@@ -166,7 +166,7 @@ namespace ME
         public:
             typedef void (Obj::*ListenerFunc)(const Ev&);
             EventDispatcherMember(ListenerFunc listener, Obj* instance) : m_Function(listener), m_Instance(instance) {}
-            bool Dispatch(Event* theevent) override final { (m_Instance->*m_Function)(*((Ev*)theevent)); return true; }
+            bool Dispatch(Event* theevent) const override final { (m_Instance->*m_Function)(*((Ev*)theevent)); return true; }
 
             Obj* m_Instance;
             ListenerFunc m_Function;
@@ -179,14 +179,14 @@ namespace ME
         public:
             typedef void (Obj::*ListenerFunc)(const Ev&);
             EventDispatcherMemberWk(ListenerFunc listener, WPtr<Obj> instance) : m_Function(listener), m_Instance(instance) {}
-            bool Dispatch(Event* theevent) override final 
+            bool Dispatch(Event* theevent) const override final
             {
                 if (m_Instance.expired())
                     return false;
                 ((m_Instance.lock().get())->*m_Function)(*((Ev*)theevent));
                 return true;
             }
-            bool Expired() override final { return m_Instance.expired(); }
+            bool Expired() const override final { return m_Instance.expired(); }
 
             WPtr<Obj> m_Instance;
             ListenerFunc m_Function;
@@ -199,7 +199,7 @@ namespace ME
         public:
             typedef void (*ListenerFunc)(const Ev&);
             EventDispatcher(ListenerFunc listener) : m_Function(listener) {}
-            bool Dispatch(Event* theevent) override final { (m_Function)(*((Ev*)theevent)); return true; }
+            bool Dispatch(Event* theevent) const override final { (m_Function)(*((Ev*)theevent)); return true; }
 
             ListenerFunc m_Function;
         };

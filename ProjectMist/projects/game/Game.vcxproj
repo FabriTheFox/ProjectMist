@@ -21,6 +21,9 @@
   <ItemGroup>
     <ClCompile Include="code\GameMain.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="code\TestEvents.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{BFC91FB5-0973-4B7A-96B7-7F9B65637956}</ProjectGuid>
