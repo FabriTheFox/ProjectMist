@@ -27,6 +27,16 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         break;
     }
 
+    case WM_CLOSE:
+    {
+        break;
+    }
+
+    case WM_DESTROY:
+    {
+        break;
+    }
+
     break;
     }
 
@@ -54,21 +64,31 @@ void ME::Window::CreateTheWindow()
 
     RegisterClass(&wc);
 
-    // Create the window.
+    BOOL menu = FALSE;
+    RECT m_rc;
+    int nDefaultWidth = 1920;
+    int nDefaultHeight = 1080;
+    SetRect(&m_rc, 0, 0, nDefaultWidth, nDefaultHeight);
+    AdjustWindowRect(
+        &m_rc,
+        WS_OVERLAPPEDWINDOW,
+        menu
+    );
 
+    // Create the window.
     m_WindowHandle = CreateWindowEx(
         0,                              // Optional window styles.
         CLASS_NAME,                     // Window class
-        "LMAO",    // Window text
+        "LMAO",                         // Window text
         WS_OVERLAPPEDWINDOW,            // Window style
-
                                         // Size and position
-        CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+        CW_USEDEFAULT, CW_USEDEFAULT, 
+        (m_rc.right - m_rc.left), (m_rc.bottom - m_rc.top),
 
-        NULL,       // Parent window    
-        NULL,       // Menu
-        (HINSTANCE)hist,  // Instance handle
-        NULL        // Additional application data
+        NULL,               // Parent window    
+        NULL,               // Menu
+        (HINSTANCE)hist,    // Instance handle
+        NULL                // Additional application data
     );
 
     if (m_WindowHandle == NULL)
