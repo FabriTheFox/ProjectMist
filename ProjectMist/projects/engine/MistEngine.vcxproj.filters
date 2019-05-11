@@ -5,6 +5,7 @@
     <ClCompile Include="code\Terminal\Terminal.cpp" />
     <ClCompile Include="code\Terminal\Window.cpp" />
     <ClCompile Include="code\Graphics\Graphics.cpp" />
+    <ClCompile Include="code\Graphics\DeviceResources.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Libraries\Containers.h" />
@@ -17,5 +18,10 @@
     <ClInclude Include="code\RTTI\RTTI.h" />
     <ClInclude Include="code\Engine\MistEngineDefs.h" />
     <ClInclude Include="code\Graphics\Graphics.h" />
+    <ClInclude Include="code\Graphics\DeviceResources.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\..\data\CubeVertexShader.hlsl" />
+    <FxCompile Include="..\..\data\CubePixelShader.hlsl" />
   </ItemGroup>
 </Project>

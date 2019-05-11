@@ -46,8 +46,11 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 ME::Window::Window()
     : m_WindowHandle(nullptr)
 {
-
+    dr = new DeviceResources;
 }
+
+
+#include <Graphics/Graphics.h>
 
 #undef CreateWindow
 void ME::Window::CreateTheWindow()
@@ -97,6 +100,13 @@ void ME::Window::CreateTheWindow()
     }
 
     ShowWindow((HWND)m_WindowHandle, SW_SHOWNORMAL);
+
+    dr->CreateDeviceResources();
+    dr->CreateWindowResources((HWND)m_WindowHandle);
+
+    Graphics::GetInstance().CreateShaders(dr->m_pd3dDevice);
+    Graphics::GetInstance().CreateBuffers(dr->m_pd3dDevice);
+    Graphics::GetInstance().CreateViewAndPerspective();
 }
 
 void ME::Window::SetWindowName(const String& name)
@@ -117,5 +127,10 @@ void ME::Window::ProcessWindowMessages()
         TranslateMessage(&msg);
         DispatchMessage(&msg);
     }
+
+    Graphics::GetInstance().Update();
+    Graphics::GetInstance().Render(dr->m_pd3dDeviceContext, dr->m_pRenderTarget, dr->m_pDepthStencilView);
+
+    dr->Present();
 }
 

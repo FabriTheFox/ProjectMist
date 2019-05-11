@@ -3,6 +3,8 @@
 #include <Engine/MistEngineDefs.h>
 #include <Libraries/Containers.h>
 
+#include <Graphics/DeviceResources.h>
+
 namespace ME
 {
     class Window
@@ -20,6 +22,8 @@ namespace ME
     private:
         String m_WindowName;
         void* m_WindowHandle;
+
+        DeviceResources* dr;
     };
 }
 
