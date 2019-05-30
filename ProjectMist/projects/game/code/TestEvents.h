@@ -33,18 +33,18 @@ void globalOnExplosion(const ExplosionEvent& explo)
 
 void TestEvents()
 {
-    auto& evs = ME::EventSystem::GetInstance();
-    ME::Ptr<ListeningClass> ExplosionListener = std::make_shared<ListeningClass>();
-
-    ME::WPtr<ListeningClass> lis = ExplosionListener;
-
-    evs.RegisterListener(&ListeningClass::OnExplosionEvent, lis);
-    evs.RegisterListener(&ListeningClass::OnExplosionEvent2, lis);
-
-    //evs.RegisterListener(&globalOnExplosion);
-
-    ExplosionEvent explosion;
-    explosion.name = "BOOM";
+    //auto& evs = ME::EventSystem::GetInstance();
+    //ME::Ptr<ListeningClass> ExplosionListener = std::make_shared<ListeningClass>();
+    //
+    //ME::WPtr<ListeningClass> lis = ExplosionListener;
+    //
+    //evs.RegisterListener(&ListeningClass::OnExplosionEvent, lis);
+    //evs.RegisterListener(&ListeningClass::OnExplosionEvent2, lis);
+    //
+    ////evs.RegisterListener(&globalOnExplosion);
+    //
+    //ExplosionEvent explosion;
+    //explosion.name = "BOOM";
 
     //evs.UnRegisterListener(&ListeningClass::OnExplosionEvent, lis);
 
@@ -53,6 +53,6 @@ void TestEvents()
 
     //evs.UnRegisterAllListenersOfEvent(explosion.GetRTTI());
 
-    evs.DispatchEvent(explosion);
-    evs.DispatchEvent(explosion);
+    //evs.DispatchEvent(explosion);
+    //evs.DispatchEvent(explosion);
 }

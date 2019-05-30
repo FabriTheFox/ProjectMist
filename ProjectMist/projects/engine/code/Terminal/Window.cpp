@@ -101,12 +101,12 @@ void ME::Window::CreateTheWindow()
 
     ShowWindow((HWND)m_WindowHandle, SW_SHOWNORMAL);
 
-    dr->CreateDeviceResources();
-    dr->CreateWindowResources((HWND)m_WindowHandle);
+    //dr->CreateDeviceResources();
+    //dr->CreateWindowResources((HWND)m_WindowHandle);
 
-    Graphics::GetInstance().CreateShaders(dr->m_pd3dDevice);
-    Graphics::GetInstance().CreateBuffers(dr->m_pd3dDevice);
-    Graphics::GetInstance().CreateViewAndPerspective();
+    //Graphics::GetInstance().CreateShaders(dr->m_pd3dDevice);
+    //Graphics::GetInstance().CreateBuffers(dr->m_pd3dDevice);
+    //Graphics::GetInstance().CreateViewAndPerspective();
 }
 
 void ME::Window::SetWindowName(const String& name)
@@ -128,9 +128,9 @@ void ME::Window::ProcessWindowMessages()
         DispatchMessage(&msg);
     }
 
-    Graphics::GetInstance().Update();
-    Graphics::GetInstance().Render(dr->m_pd3dDeviceContext, dr->m_pRenderTarget, dr->m_pDepthStencilView);
+    //Graphics::GetInstance().Update();
+    //Graphics::GetInstance().Render(dr->m_pd3dDeviceContext, dr->m_pRenderTarget, dr->m_pDepthStencilView, dr);
 
-    dr->Present();
+    //dr->Present();
 }
 

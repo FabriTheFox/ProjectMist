@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Engine/MistEngineDefs.h>
-#include <Engine/Singleton.h>
 #include <Libraries/Containers.h>
 #include <Libraries/Memory.h>
 #include <RTTI/RTTI.h>
@@ -20,9 +19,6 @@ namespace ME
 
     class EventSystem
     {
-        RTTI_DECLARATION(EventSystem);
-        SINGLETON_DEFCTOR(EventSystem);
-
     public:
         template <typename Ev, typename Obj>
         void RegisterListener(void (Obj::*listener)(const Ev&), Obj* instance)
@@ -151,9 +147,8 @@ namespace ME
             }
         }
 
-        class IEventDispatcher
+        class IEventDispatcher : public IDynamic
         {
-            RTTI_DECLARATION(IEventDispatcher);
         public:
             virtual bool Dispatch(Event* theevent) const = 0;
             virtual bool Expired() const { return false; }
@@ -204,12 +199,11 @@ namespace ME
             ListenerFunc m_Function;
         };
 
-        using DispatcherArray = std::vector<Uptr<IEventDispatcher>>;
+        using DispatcherArray = std::vector<UPtr<IEventDispatcher>>;
         std::map<RTTI, DispatcherArray> m_Dispatchers;
     };
 
-    RTTI_IMPLEMENTATION(EventSystem);
-    RTTI_IMPLEMENTATION(EventSystem::IEventDispatcher);
+    //RTTI_IMPLEMENTATION(EventSystem);
 
     RTTI_IMPLEMENTATION_TEMPLATE(EventSystem::EventDispatcherMember, Ev, Obj);
     RTTI_IMPLEMENTATION_TEMPLATE(EventSystem::EventDispatcherMemberWk, Ev, Obj);

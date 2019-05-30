@@ -7,19 +7,19 @@
 
 namespace ME
 {
-    class Window
+    class MISTENGINE_DLL Window
     {
     public:
-        MISTENGINE_DLL Window();
+        Window();
 
-        MISTENGINE_DLL void CreateTheWindow();
+        void CreateTheWindow();
 
-        MISTENGINE_DLL void SetWindowName(const String& name);
-        MISTENGINE_DLL const String& GetWindowName();
+        void SetWindowName(const String& name);
+        const String& GetWindowName();
 
-        MISTENGINE_DLL void ProcessWindowMessages();
+        void ProcessWindowMessages();
 
-    private:
+    //private:
         String m_WindowName;
         void* m_WindowHandle;
 

@@ -5,6 +5,9 @@
 #define PTR_CAST(type)				\
 	std::static_pointer_cast < type >
 
+#define UNUSED_PARAM(type)          \
+    (void)(type)
+
 namespace ME
 {
     template <typename T>
@@ -14,5 +17,5 @@ namespace ME
     using WPtr = std::weak_ptr < T >;
 
     template <typename T>
-    using Uptr = std::unique_ptr < T >;
+    using UPtr = std::unique_ptr < T >;
 }

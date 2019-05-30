@@ -1,21 +1,20 @@
 #pragma once
 
 #include <Engine/MistEngineDefs.h>
-#include <Engine/Singleton.h>
 #include <RTTI/RTTI.h>
+#include <Engine/System/System.h>
+#include <Graphics/Graphics.h>
 
 #include "Window.h"
 
 namespace ME
 {
-    class Terminal 
+    class MISTENGINE_DLL Terminal : public System
     {
-        RTTI_DECLARATION(Terminal);
-        SINGLETON_DEFCTOR_DLL(Terminal, MISTENGINE_DLL);
+        SYSTEM_DECLARATION(Terminal);
 
     public:
-
-        MISTENGINE_DLL ME::Window& GetWindow();
+        ME::Window& GetWindow();
 
     private:
         Window m_Window;

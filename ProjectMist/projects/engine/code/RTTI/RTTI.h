@@ -1,12 +1,19 @@
 #pragma once
 
 #include <Libraries/Containers.h>
+#include <Libraries/Memory.h>
 
-#define RTTI_DECLARATION(thistype)																                    \
-	public:																						                    \
-	virtual const ME::RTTI& GetRTTI() const {return sm_RTTI;}									                    \
-	static const ME::RTTI& sGetRTTI() {return sm_RTTI;}											                    \
-	private: static const ME::RTTI& sm_RTTI;															            \
+#define RTTI_DECLARATION(thistype)																        \
+	public:																						        \
+	virtual const ME::RTTI& GetRTTI() const {return sm_RTTI;}									        \
+	static const ME::RTTI& sGetRTTI() {return sm_RTTI;}											        \
+	private: static const ME::RTTI& sm_RTTI;				                                            \
+
+#define RTTI_DECLARATION_DLL(thistype, dll)															    \
+	public:																						        \
+	virtual const ME::RTTI& GetRTTI() const {return sm_RTTI;}									        \
+	static const ME::RTTI& sGetRTTI() {return sm_RTTI;}											        \
+	private: static const ME::RTTI& sm_RTTI;				                                            \
 
 #define RTTI_IMPLEMENTATION(thistype)													\
 	const ME::RTTI& thistype::sm_RTTI = ME::RTTISystem::RegisterRTTI<thistype>();	    \
@@ -29,17 +36,31 @@
 
 namespace ME
 {
+    class IDynamic;
+
     class RTTI
     {
     public:
         using Hash = size_t;
-        RTTI(const std::string& name = "", Hash type = 0) :
-            m_Typename(name), m_Typehash(type) {}
+        typedef IDynamic*(*CreatorFuncRaw)();
+        typedef UPtr<IDynamic>(*CreatorFuncUnique)();
+
+        RTTI(const String& name = "", Hash type = 0, CreatorFuncRaw creator = nullptr) :
+            m_Typename(name), m_Typehash(type), mCreatorRaw(creator){}
+
         bool operator< (const RTTI& rhs) const { return m_Typehash < rhs.m_Typehash; }
         bool operator== (const RTTI& rhs) const { return m_Typehash == rhs.m_Typehash; }
 
+        template<typename T>
+        T* CreateRawAs() const { return reinterpret_cast<T*>(mCreatorRaw()); }
+
+        template<typename T>
+        UPtr<T> CreateUniqueAs() const { return ME::UPtr<T>{static_cast<T*>(mCreatorUnique().release())};}
+
         String m_Typename;
         Hash m_Typehash = 0;
+        CreatorFuncRaw mCreatorRaw{ nullptr };
+        CreatorFuncUnique mCreatorUnique{ nullptr };
     };
 
     class RTTISystem
@@ -48,11 +69,15 @@ namespace ME
         template <typename T>
         static RTTI& RegisterRTTI()
         {
-            auto hash = typeid(T).hash_code();
             auto str = typeid(T).name();
             auto& rtti = GetRTTIsByName()[str];
-            rtti = { str, hash };
-            GetRTTIsByHash()[hash] = rtti;
+
+            rtti.m_Typehash = typeid(T).hash_code();;
+            rtti.m_Typename = str;
+            rtti.mCreatorRaw = [](){return static_cast<IDynamic*>((new T())); };
+            rtti.mCreatorUnique = [](){ return static_cast<UPtr<IDynamic>>(std::make_unique<T>()); };
+
+            GetRTTIsByHash()[rtti.m_Typehash] = rtti;
             return rtti;
         }
 
@@ -87,3 +112,16 @@ namespace ME
 
     };
 }
+
+// Compatibility with std unordered containers
+namespace std
+{
+    template <>
+    class hash<ME::RTTI> {
+    public:
+        size_t operator()(const ME::RTTI & rtti) const
+        {
+            return rtti.m_Typehash;
+        }
+    };
+};
