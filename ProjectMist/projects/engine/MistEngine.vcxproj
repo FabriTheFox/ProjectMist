@@ -31,14 +31,13 @@
     <ClCompile Include="code\Terminal\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="code\Engine\ClassAttributes\ClassAttributes.h" />
+    <ClInclude Include="code\Engine\ClassQualifiers\ClassQualifiers.h" />
     <ClInclude Include="code\EntitySystem\Component\Component.h" />
     <ClInclude Include="code\EntitySystem\EntitySystem.h" />
     <ClInclude Include="code\EntitySystem\Entity\Entity.h" />
     <ClInclude Include="code\Engine\MistEngine.h" />
     <ClInclude Include="code\Engine\MistEngineDefs.h" />
     <ClInclude Include="code\Engine\System\System.h" />
-    <ClInclude Include="code\Engine\ClassAttributes\Singleton.h" />
     <ClInclude Include="code\EventSystem\EventSystem.h" />
     <ClInclude Include="code\Graphics\DeviceResources.h" />
     <ClInclude Include="code\Graphics\Graphics.h" />

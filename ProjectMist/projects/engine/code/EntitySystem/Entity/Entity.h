@@ -1,7 +1,7 @@
 #pragma once
 
 #include <RTTI/RTTI.h>
-#include <Engine/ClassAttributes/ClassAttributes.h>
+#include <Engine/ClassQualifiers/ClassQualifiers.h>
 #include <Libraries/Containers.h>
 #include <Libraries/Memory.h>
 #include <Engine/MistEngineDefs.h>

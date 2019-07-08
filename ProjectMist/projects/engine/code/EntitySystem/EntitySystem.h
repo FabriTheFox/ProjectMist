@@ -16,8 +16,8 @@ namespace ME
         SYSTEM_DECLARATION(EntitySystem);
 
     public:
-        void Initialize();
-        void Update();
+        void OnInitialize();
+        void OnUpdate();
 
         Entity& CreateEntity(const String& name = "");
 

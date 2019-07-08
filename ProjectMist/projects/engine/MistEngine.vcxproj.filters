@@ -25,11 +25,10 @@
     <ClInclude Include="code\Graphics\DeviceResources.h" />
     <ClInclude Include="code\Engine\MistEngine.h" />
     <ClInclude Include="code\Engine\System\System.h" />
-    <ClInclude Include="code\Engine\ClassAttributes\Singleton.h" />
-    <ClInclude Include="code\Engine\ClassAttributes\ClassAttributes.h" />
     <ClInclude Include="code\EntitySystem\Entity\Entity.h" />
     <ClInclude Include="code\EntitySystem\EntitySystem.h" />
     <ClInclude Include="code\EntitySystem\Component\Component.h" />
     <ClInclude Include="code\Graphics\RendererComp\RendererComp.h" />
+    <ClInclude Include="code\Engine\ClassQualifiers\ClassQualifiers.h" />
   </ItemGroup>
 </Project>

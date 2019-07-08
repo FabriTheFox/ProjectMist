@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Engine/ClassAttributes/ClassAttributes.h>
+#include <Engine/ClassQualifiers/ClassQualifiers.h>
 
 #include <Graphics/Graphics.h>
 #include <Terminal/Terminal.h>
