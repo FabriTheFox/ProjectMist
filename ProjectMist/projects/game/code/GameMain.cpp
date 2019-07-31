@@ -16,10 +16,17 @@
 
 #include <Graphics/RendererComp/RendererComp.h>
 
+class lmao
+{
+public:
+    float r;
+};
+
 class A
 {
 public:
     int a;
+    static constexpr lmao lm{};
 };
 
 class B : public A
@@ -30,6 +37,9 @@ public:
 
 int main()
 {
+    A aa = A();
+    float rrr = aa.lm.r;
+
     ME::MistEngine e;
     auto& t = e.Terminal;
     t.GetWindow().SetWindowName("Liya");

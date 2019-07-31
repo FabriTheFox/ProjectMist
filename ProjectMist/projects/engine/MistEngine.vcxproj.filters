@@ -11,6 +11,10 @@
     <ClCompile Include="code\EntitySystem\EntitySystem.cpp" />
     <ClCompile Include="code\EntitySystem\Component\Component.cpp" />
     <ClCompile Include="code\Graphics\RendererComp\RendererComp.cpp" />
+    <ClCompile Include="code\Graphics\RenderPipeline\RenderPipeline.cpp" />
+    <ClCompile Include="code\Graphics\Model\Model.cpp" />
+    <ClCompile Include="code\Graphics\Shader\Shader.cpp" />
+    <ClCompile Include="code\Graphics\InputLayout\VertexLayout.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Libraries\Containers.h" />
@@ -31,5 +35,9 @@
     <ClInclude Include="code\EntitySystem\EntitySystem.h" />
     <ClInclude Include="code\EntitySystem\Component\Component.h" />
     <ClInclude Include="code\Graphics\RendererComp\RendererComp.h" />
+    <ClInclude Include="code\Graphics\RenderPipeline\RenderPipeline.h" />
+    <ClInclude Include="code\Graphics\Model\Model.h" />
+    <ClInclude Include="code\Graphics\Shader\Shader.h" />
+    <ClInclude Include="code\Graphics\InputLayout\VertexLayout.h" />
   </ItemGroup>
 </Project>
