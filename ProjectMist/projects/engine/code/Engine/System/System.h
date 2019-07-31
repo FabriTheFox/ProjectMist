@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Engine/ClassAttributes/ClassAttributes.h>
+#include <Engine/ClassQualifiers/ClassQualifiers.h>
 #include <RTTI/RTTI.h>
 
 #include <Engine/MistEngineDefs.h>

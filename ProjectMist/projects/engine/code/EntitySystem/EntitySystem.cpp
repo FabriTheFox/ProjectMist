@@ -3,12 +3,12 @@
 
 namespace ME
 {
-    void EntitySystem::Initialize()
+    void EntitySystem::OnInitialize()
     {
 
     }
 
-    void EntitySystem::Update()
+    void EntitySystem::OnUpdate()
     {
 
     }

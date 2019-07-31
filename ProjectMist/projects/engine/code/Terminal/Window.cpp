@@ -69,8 +69,8 @@ void ME::Window::CreateTheWindow()
 
     BOOL menu = FALSE;
     RECT m_rc;
-    int nDefaultWidth = 1920;
-    int nDefaultHeight = 1080;
+    int nDefaultWidth = 1280;
+    int nDefaultHeight = 720;
     SetRect(&m_rc, 0, 0, nDefaultWidth, nDefaultHeight);
     AdjustWindowRect(
         &m_rc,

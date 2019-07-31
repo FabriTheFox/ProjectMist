@@ -29,15 +29,17 @@
     <ClInclude Include="code\Graphics\DeviceResources.h" />
     <ClInclude Include="code\Engine\MistEngine.h" />
     <ClInclude Include="code\Engine\System\System.h" />
-    <ClInclude Include="code\Engine\ClassAttributes\Singleton.h" />
-    <ClInclude Include="code\Engine\ClassAttributes\ClassAttributes.h" />
     <ClInclude Include="code\EntitySystem\Entity\Entity.h" />
     <ClInclude Include="code\EntitySystem\EntitySystem.h" />
     <ClInclude Include="code\EntitySystem\Component\Component.h" />
     <ClInclude Include="code\Graphics\RendererComp\RendererComp.h" />
+<<<<<<< HEAD
     <ClInclude Include="code\Graphics\RenderPipeline\RenderPipeline.h" />
     <ClInclude Include="code\Graphics\Model\Model.h" />
     <ClInclude Include="code\Graphics\Shader\Shader.h" />
     <ClInclude Include="code\Graphics\InputLayout\VertexLayout.h" />
+=======
+    <ClInclude Include="code\Engine\ClassQualifiers\ClassQualifiers.h" />
+>>>>>>> 34edc5f4a4365840cc2a2070b0e2394c5a735313
   </ItemGroup>
 </Project>

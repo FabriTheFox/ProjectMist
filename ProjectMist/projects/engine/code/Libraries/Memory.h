@@ -11,7 +11,7 @@
 namespace ME
 {
     template <typename T>
-    using Ptr = std::shared_ptr < T >;
+    using SPtr = std::shared_ptr < T >;
 
     template <typename T>
     using WPtr = std::weak_ptr < T >;
