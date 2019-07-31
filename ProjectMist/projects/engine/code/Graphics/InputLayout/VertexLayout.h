@@ -7,11 +7,11 @@
 class IVertexLayout
 {
 public:
-    const ME::Vector<D3D11_INPUT_ELEMENT_DESC>& GetInputLayoutDesc() { return mLayout; }
-    ID3D11Buffer* GetVertexBuffer() { return mVertexBuffer; }
-    ID3D11Buffer* GetIndexBuffer() { return mIndexBuffer; }
-    unsigned int GetVertexCount() { return mVertexCount; }
-    unsigned int GetIndexCount() { return mIndexCount; }
+    const ME::Vector<D3D11_INPUT_ELEMENT_DESC>& GetInputLayoutDesc() const { return mLayout; }
+    ID3D11Buffer* GetVertexBuffer() const { return mVertexBuffer; }
+    ID3D11Buffer* GetIndexBuffer() const { return mIndexBuffer; }
+    unsigned int GetVertexCount() const { return mVertexCount; }
+    unsigned int GetIndexCount() const { return mIndexCount; }
 
 protected:
     ME::Vector<D3D11_INPUT_ELEMENT_DESC> mLayout;
