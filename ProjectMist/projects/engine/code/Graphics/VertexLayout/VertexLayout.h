@@ -14,6 +14,7 @@ namespace ME
         ID3D11Buffer* GetIndexBuffer() const { return mIndexBuffer; }
         unsigned int GetVertexCount() const { return mVertexCount; }
         unsigned int GetIndexCount() const { return mIndexCount; }
+        unsigned int GetVertexSize() const { return mVertexSize; }
 
     protected:
         ME::Vector<D3D11_INPUT_ELEMENT_DESC> mLayout;
@@ -21,6 +22,7 @@ namespace ME
         ID3D11Buffer* mIndexBuffer = nullptr;
         unsigned int mIndexCount = 0;
         unsigned int mVertexCount = 0;
+        unsigned int mVertexSize = 0;
     };
 
     class VertexLayout : public IVertexLayout

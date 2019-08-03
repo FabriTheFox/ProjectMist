@@ -28,6 +28,8 @@ namespace ME
             { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
         { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }
         };
+
+        mVertexSize = sizeof(VertexPosColor::Vertex);
     }
 
     void VertexPosColor::Load(ID3D11Device* device, ME::Vector<VertexPosColor::Vertex>& vertices)

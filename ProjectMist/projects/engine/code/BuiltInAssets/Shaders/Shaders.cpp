@@ -70,7 +70,7 @@ namespace ME
         context->OMSetRenderTargets(1, &renderTarget, depthStencil);
 
         // Set up the IA stage by setting the input topology and layout.
-        UINT stride = sizeof(ConstantBufferStruct);
+        UINT stride = model->mVertexLayout->GetVertexSize();
         UINT offset = 0;
 
         ID3D11Buffer* vertexBuffer = model->mVertexLayout->GetVertexBuffer();
