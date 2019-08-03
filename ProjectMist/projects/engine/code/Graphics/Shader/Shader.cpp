@@ -39,100 +39,55 @@ HRESULT CompileShaderFromFile(LPCWSTR szFileName, LPCSTR szEntryPoint, LPCSTR sz
     return S_OK;
 }
 
-void ShaderProgram::Create(ID3D11Device* dev)
+#include <Graphics/VertexLayout/VertexLayout.h>
+namespace ME
 {
-    
-}
-
-void ShaderProgram::CreateViewAndPerspective()
-{
-    DirectX::XMVECTOR eye = DirectX::XMVectorSet(0.0f, 0.7f, 1.5f, 0.f);
-    DirectX::XMVECTOR at = DirectX::XMVectorSet(0.0f, -0.1f, 0.0f, 0.f);
-    DirectX::XMVECTOR up = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.f);
-
-    DirectX::XMStoreFloat4x4(
-        &m_constantBufferData.view,
-        DirectX::XMMatrixTranspose(
-            DirectX::XMMatrixLookAtRH(
-                eye,
-                at,
-                up
-            )
-        )
-    );
-
-    float aspectRatio = 16.f / 9.f;
-
-    DirectX::XMStoreFloat4x4(
-        &m_constantBufferData.projection,
-        DirectX::XMMatrixTranspose(
-            DirectX::XMMatrixPerspectiveFovRH(
-                DirectX::XMConvertToRadians(70),
-                aspectRatio,
-                0.01f,
-                100.0f
-            )
-        )
-    );
-}
-
-#include <Graphics/InputLayout/VertexLayout.h>
-void VertexShader::Create(ID3D11Device* dev, const ME::String& file, const IVertexLayout* ilay)
-{
-    HRESULT hr = S_OK;
-
-    // Compile the vertex shader
-    ID3DBlob* pVSBlob = nullptr;
-    hr = CompileShaderFromFile(L"shaders/CubeVertexShader.hlsl", "VS", "vs_4_0", &pVSBlob);
-    if (FAILED(hr))
+    void VertexShader::Create(ID3D11Device* dev, const ME::String& file, const IVertexLayout* ilay)
     {
-        return;
-    }
+        HRESULT hr = S_OK;
 
-    // Create the vertex shader
-    hr = dev->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &m_pVertexShader);
-    if (FAILED(hr))
-    {
+        // Compile the vertex shader
+        ID3DBlob* pVSBlob = nullptr;
+        hr = CompileShaderFromFile(L"shaders/CubeVertexShader.hlsl", "VS", "vs_4_0", &pVSBlob);
+        if (FAILED(hr))
+        {
+            return;
+        }
+
+        // Create the vertex shader
+        hr = dev->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &m_pVertexShader);
+        if (FAILED(hr))
+        {
+            pVSBlob->Release();
+            return;
+        }
+
+        const auto& ilaydesc = ilay->GetInputLayoutDesc();
+
+        // Create the input layout
+        hr = dev->CreateInputLayout(ilaydesc.data(), ilaydesc.size(), pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), &m_pInputLayout);
         pVSBlob->Release();
-        return;
+        if (FAILED(hr))
+            return;
     }
 
-    const auto& ilaydesc = ilay->GetInputLayoutDesc();
-
-    // Create the input layout
-    hr = dev->CreateInputLayout(ilaydesc.data(), ilaydesc.size(), pVSBlob->GetBufferPointer(),
-        pVSBlob->GetBufferSize(), &m_pInputLayout);
-    pVSBlob->Release();
-    if (FAILED(hr))
-        return;
-}
-
-void PixelShader::Create(ID3D11Device* dev, const ME::String& file)
-{
-    HRESULT hr = S_OK;
-
-    // Compile the pixel shader
-    ID3DBlob* pPSBlob = nullptr;
-    hr = CompileShaderFromFile(L"shaders/CubePixelShader.hlsl", "PS", "ps_4_0", &pPSBlob);
-    if (FAILED(hr))
+    void PixelShader::Create(ID3D11Device* dev, const ME::String& file)
     {
-        return;
+        HRESULT hr = S_OK;
+
+        // Compile the pixel shader
+        ID3DBlob* pPSBlob = nullptr;
+        hr = CompileShaderFromFile(L"shaders/CubePixelShader.hlsl", "PS", "ps_4_0", &pPSBlob);
+        if (FAILED(hr))
+        {
+            return;
+        }
+
+        // Create the pixel shader
+        hr = dev->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &m_pPixelShader);
+        pPSBlob->Release();
+        if (FAILED(hr))
+            return;
     }
-
-    // Create the pixel shader
-    hr = dev->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &m_pPixelShader);
-    pPSBlob->Release();
-    if (FAILED(hr))
-        return;
-
-    CD3D11_BUFFER_DESC cbDesc(
-        sizeof(ConstantBufferStruct),
-        D3D11_BIND_CONSTANT_BUFFER
-    );
-
-    hr = dev->CreateBuffer(
-        &cbDesc,
-        nullptr,
-        &m_pConstantBuffer
-    );
 }
+

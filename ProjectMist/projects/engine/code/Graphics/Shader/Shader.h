@@ -1,47 +1,63 @@
 #pragma once
 
 #include <Libraries/Containers.h>
-class ID3D11Device;
 
-class ShaderProgram
+struct ID3D11Device;
+struct ID3D11Buffer;
+struct ID3D11VertexShader;
+struct ID3D11PixelShader;
+struct ID3D11InputLayout;
+
+namespace ME
 {
-public:
-    void Create(ID3D11Device* dev);
-    
-    virtual void CreateConstantBuffers() = 0;
-    virtual void Draw() = 0;
+    class IVertexLayout;   
+    class DeviceResources;
+    class Model;
 
-    struct ConstantBufferStruct{
-        DirectX::XMFLOAT4X4 world;
-        DirectX::XMFLOAT4X4 view;
-        DirectX::XMFLOAT4X4 projection;
+    class VertexShader;
+    class PixelShader;
+
+    class ShaderProgram
+    {
+    public:
+        virtual void CreateConstantBuffers(ID3D11Device* dev) = 0;
+        virtual void Draw(DeviceResources* dev, Model* model) = 0;
+
+        void SetVertexShader(VertexShader* vs) { mVertexShader = vs; }
+        void SetPixelShader(PixelShader* ps) { mPixelShader = ps; }
+
+    protected:
+        ME::Vector<ID3D11Buffer*> mConstantBuffers;
+        ID3D11Buffer* m_pConstantBuffer = nullptr;
+
+        VertexShader* mVertexShader = nullptr;
+        PixelShader* mPixelShader = nullptr;
     };
-    static_assert((sizeof(ConstantBufferStruct) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
 
-    ME::Vector<ID3D11Buffer*> mConstantBuffers;
-    ID3D11Buffer* m_pConstantBuffer = nullptr;
+    class VertexShader
+    {
+    public:
+        void Create(ID3D11Device* dev, const ME::String& file, const IVertexLayout* verlay);
 
-public:
-    void CreateViewAndPerspective();
-};
+        ID3D11VertexShader* GetVertexShader() const { return m_pVertexShader; }
+        ID3D11InputLayout* GetInputLayout() const { return m_pInputLayout; }
+        ID3D11InputLayout* GetInputLayoutExtended() const { return m_pInputLayoutExtended; }
 
-class IVertexLayout;
-class VertexShader
-{
-public:
-    void Create(ID3D11Device* dev, const ME::String& file, const IVertexLayout* verlay);
+    private:
+        ID3D11VertexShader* m_pVertexShader = nullptr;
+        ID3D11InputLayout* m_pInputLayout = nullptr;
+        ID3D11InputLayout* m_pInputLayoutExtended = nullptr;
+    };
 
-private:
-    ID3D11VertexShader* m_pVertexShader = nullptr;
-    ID3D11InputLayout* m_pInputLayout = nullptr;
-    ID3D11InputLayout* m_pInputLayoutExtended = nullptr;
-};
+    class PixelShader
+    {
+    public:
+        void Create(ID3D11Device* dev, const ME::String& file);
 
-class PixelShader
-{
-public:
-    void Create(ID3D11Device* dev, const ME::String& file);
+        ID3D11PixelShader* GetPixelShader() const { return m_pPixelShader; }
 
-private:
-    ID3D11PixelShader * m_pPixelShader = nullptr;
-};
+    private:
+        ID3D11PixelShader* m_pPixelShader = nullptr;
+    };
+}
+

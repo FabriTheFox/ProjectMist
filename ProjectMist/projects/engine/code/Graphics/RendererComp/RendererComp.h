@@ -8,6 +8,8 @@
 namespace ME
 {
     class DeviceResources;
+    class Model;
+    class ShaderProgram;
 
     class MISTENGINE_DLL RendererComp : public Component
     {
@@ -22,9 +24,8 @@ namespace ME
 
         void Render(DeviceResources* dev);
 
-        void CreateShaders(ID3D11Device* dev);
-        void CreateBuffers(ID3D11Device* dev);
-
     private:
+        Model* mModel = nullptr;
+        ShaderProgram* mShader = nullptr;
     };
 }

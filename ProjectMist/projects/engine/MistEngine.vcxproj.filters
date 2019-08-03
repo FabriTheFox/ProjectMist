@@ -14,7 +14,9 @@
     <ClCompile Include="code\Graphics\RenderPipeline\RenderPipeline.cpp" />
     <ClCompile Include="code\Graphics\Model\Model.cpp" />
     <ClCompile Include="code\Graphics\Shader\Shader.cpp" />
-    <ClCompile Include="code\Graphics\InputLayout\VertexLayout.cpp" />
+    <ClCompile Include="code\InputSystem\InputSystem.cpp" />
+    <ClCompile Include="code\BuiltInAssets\Shaders\Shaders.cpp" />
+    <ClCompile Include="code\Graphics\VertexLayout\VertexLayout.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Libraries\Containers.h" />
@@ -33,13 +35,12 @@
     <ClInclude Include="code\EntitySystem\EntitySystem.h" />
     <ClInclude Include="code\EntitySystem\Component\Component.h" />
     <ClInclude Include="code\Graphics\RendererComp\RendererComp.h" />
-<<<<<<< HEAD
     <ClInclude Include="code\Graphics\RenderPipeline\RenderPipeline.h" />
     <ClInclude Include="code\Graphics\Model\Model.h" />
     <ClInclude Include="code\Graphics\Shader\Shader.h" />
-    <ClInclude Include="code\Graphics\InputLayout\VertexLayout.h" />
-=======
     <ClInclude Include="code\Engine\ClassQualifiers\ClassQualifiers.h" />
->>>>>>> 34edc5f4a4365840cc2a2070b0e2394c5a735313
+    <ClInclude Include="code\InputSystem\InputSystem.h" />
+    <ClInclude Include="code\BuiltInAssets\Shaders\Shaders.h" />
+    <ClInclude Include="code\Graphics\VertexLayout\VertexLayout.h" />
   </ItemGroup>
 </Project>
