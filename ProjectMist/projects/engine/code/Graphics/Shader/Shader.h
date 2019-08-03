@@ -7,23 +7,23 @@ class ShaderProgram
 {
 public:
     void Create(ID3D11Device* dev);
-    void Draw();
+    
+    virtual void CreateConstantBuffers() = 0;
+    virtual void Draw() = 0;
 
     struct ConstantBufferStruct{
         DirectX::XMFLOAT4X4 world;
         DirectX::XMFLOAT4X4 view;
         DirectX::XMFLOAT4X4 projection;
     };
-
-    // Assert that the constant buffer remains 16-byte aligned.
     static_assert((sizeof(ConstantBufferStruct) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
 
+    ME::Vector<ID3D11Buffer*> mConstantBuffers;
     ID3D11Buffer* m_pConstantBuffer = nullptr;
 
 public:
     void CreateViewAndPerspective();
 };
-
 
 class IVertexLayout;
 class VertexShader
