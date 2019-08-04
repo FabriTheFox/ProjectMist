@@ -33,6 +33,7 @@
     <ClCompile Include="code\Graphics\RenderPipeline\RenderPipeline.cpp" />
     <ClCompile Include="code\Graphics\Shader\Shader.cpp" />
     <ClCompile Include="code\InputSystem\InputSystem.cpp" />
+    <ClCompile Include="code\Transform\Transform.cpp" />
     <ClCompile Include="code\Terminal\Terminal.cpp" />
     <ClCompile Include="code\Terminal\Window.cpp" />
   </ItemGroup>
@@ -57,6 +58,7 @@
     <ClInclude Include="code\Libraries\Containers.h" />
     <ClInclude Include="code\Libraries\Math.h" />
     <ClInclude Include="code\Libraries\Memory.h" />
+    <ClInclude Include="code\Transform\Transform.h" />
     <ClInclude Include="code\RTTI\RTTI.h" />
     <ClInclude Include="code\Terminal\Terminal.h" />
     <ClInclude Include="code\Terminal\Window.h" />

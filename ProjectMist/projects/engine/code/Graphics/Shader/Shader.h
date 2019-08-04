@@ -12,7 +12,7 @@ namespace ME
 {
     class IVertexLayout;   
     class DeviceResources;
-    class Model;
+    class RendererComp;
 
     class VertexShader;
     class PixelShader;
@@ -21,7 +21,7 @@ namespace ME
     {
     public:
         virtual void CreateConstantBuffers(ID3D11Device* dev) = 0;
-        virtual void Draw(DeviceResources* dev, Model* model) = 0;
+        virtual void Draw(DeviceResources* dev, RendererComp* comp) = 0;
 
         void SetVertexShader(VertexShader* vs) { mVertexShader = vs; }
         void SetPixelShader(PixelShader* ps) { mPixelShader = ps; }

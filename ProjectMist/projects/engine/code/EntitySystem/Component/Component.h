@@ -4,6 +4,7 @@
 #include <Engine/ClassQualifiers/ClassQualifiers.h>
 #include <Libraries/Memory.h>
 #include <Engine/MistEngineDefs.h>
+#include <Transform/Transform.h>
 
 namespace ME
 {
@@ -25,7 +26,9 @@ namespace ME
 
         virtual void OnUpdate() {}
 
-        bool IsMarkedForDeletion() { return mMarkedForDelete; };
+        bool IsMarkedForDeletion() { return mMarkedForDelete; }
+        Entity* GetOwner() { return mOwner; }
+        Transform3D& GetTransform();
 
     private:
         void MarkForDeletion() { mMarkedForDelete = true; }

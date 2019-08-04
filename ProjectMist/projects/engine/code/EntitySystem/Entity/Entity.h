@@ -5,6 +5,7 @@
 #include <Libraries/Containers.h>
 #include <Libraries/Memory.h>
 #include <Engine/MistEngineDefs.h>
+#include <Transform/Transform.h>
 
 namespace ME
 {
@@ -22,6 +23,9 @@ namespace ME
 
         const Component& AddComponent(const RTTI& type);
         const Component& GetComponent(const RTTI& type);
+
+    public:
+        Transform3D mTransform;
 
     private:
         EntitySystem * mEntitySystem{nullptr};

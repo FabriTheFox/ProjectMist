@@ -1,6 +1,8 @@
 #include "Shaders.h"
 #include <Graphics/DeviceResources.h>
 #include <Graphics/Model/Model.h>
+#include <Graphics/RendererComp/RendererComp.h>
+#include <EntitySystem/Entity/Entity.h>
 
 #include <d3d11_4.h>
 
@@ -25,39 +27,24 @@ namespace ME
         DirectX::XMVECTOR at = DirectX::XMVectorSet(0.0f, -0.1f, 0.0f, 0.f);
         DirectX::XMVECTOR up = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.f);
 
-        DirectX::XMStoreFloat4x4(
-            &mVM.view,
-            DirectX::XMMatrixTranspose(
-                DirectX::XMMatrixLookAtRH(
-                    eye,
-                    at,
-                    up
-                )
-            )
-        );
+        DirectX::XMStoreFloat4x4(&mVM.view, DirectX::XMMatrixTranspose(DirectX::XMMatrixLookAtRH(eye, at, up)));
 
         float aspectRatio = 16.f / 9.f;
 
         DirectX::XMStoreFloat4x4(
-            &mVM.projection,
-            DirectX::XMMatrixTranspose(
-                DirectX::XMMatrixPerspectiveFovRH(
-                    DirectX::XMConvertToRadians(70),
-                    aspectRatio,
-                    0.01f,
-                    100.0f
-                )
-            )
-        );
+            &mVM.projection, 
+            DirectX::XMMatrixTranspose(DirectX::XMMatrixPerspectiveFovRH(DirectX::XMConvertToRadians(70), aspectRatio, 0.01f, 100.0f)));
     }
 
-    void ColorShader::Draw(DeviceResources* dev, Model* model)
+    void ColorShader::Draw(DeviceResources* dev, RendererComp* comp)
     {
         // Use the Direct3D device context to draw.
         ID3D11DeviceContext* context = dev->m_pd3dDeviceContext;
 
         ID3D11RenderTargetView* renderTarget = dev->m_pRenderTarget;
         ID3D11DepthStencilView* depthStencil = dev->m_pDepthStencilView;;
+
+        mVM.world = comp->GetOwner()->mTransform.GetMatrix();
 
         context->UpdateSubresource(m_pConstantBuffer, 0, nullptr, &mVM, 0, 0);
 
@@ -70,12 +57,12 @@ namespace ME
         context->OMSetRenderTargets(1, &renderTarget, depthStencil);
 
         // Set up the IA stage by setting the input topology and layout.
-        UINT stride = model->mVertexLayout->GetVertexSize();
+        UINT stride = comp->mModel->mVertexLayout->GetVertexSize();
         UINT offset = 0;
 
-        ID3D11Buffer* vertexBuffer = model->mVertexLayout->GetVertexBuffer();
+        ID3D11Buffer* vertexBuffer = comp->mModel->mVertexLayout->GetVertexBuffer();
         context->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
-        context->IASetIndexBuffer(model->mVertexLayout->GetIndexBuffer(), DXGI_FORMAT_R16_UINT, 0);
+        context->IASetIndexBuffer(comp->mModel->mVertexLayout->GetIndexBuffer(), DXGI_FORMAT_R16_UINT, 0);
 
         context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
@@ -90,6 +77,6 @@ namespace ME
         context->PSSetShader(mPixelShader->GetPixelShader(), nullptr, 0);
 
         // Calling Draw tells Direct3D to start sending commands to the graphics device.
-        context->DrawIndexed(model->mVertexLayout->GetIndexCount(), 0, 0);
+        context->DrawIndexed(comp->mModel->mVertexLayout->GetIndexCount(), 0, 0);
     }
 }

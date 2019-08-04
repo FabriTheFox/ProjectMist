@@ -11,7 +11,7 @@ namespace ME
     {
     public:
         void CreateConstantBuffers(ID3D11Device* dev) override final;
-        void Draw(DeviceResources* dev, Model* model) override final;
+        void Draw(DeviceResources* dev, RendererComp* comp) override final;
 
     public:
         struct ConstantBufferStruct {

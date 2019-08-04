@@ -59,15 +59,7 @@ namespace ME
         float r1 = DirectX::XMConvertToRadians((float)((m_frameCount * 2) % 360));
         float r2 = DirectX::XMConvertToRadians((float)((m_frameCount * 4) % 360));
         
-        // Rotate the cube 1 degree per frame.
-        DirectX::XMStoreFloat4x4(
-            &mv.world,
-            DirectX::XMMatrixTranspose(
-                DirectX::XMMatrixRotationX(r0) *
-                DirectX::XMMatrixRotationY(r1) *
-                DirectX::XMMatrixRotationZ(r2)
-            )
-        );
+        GetTransform().mRotation = {0, r1, 0};
         
         ++m_frameCount;
         
@@ -76,7 +68,7 @@ namespace ME
 
     void RendererComp::Render(DeviceResources* dev)
     {
-        mShader->Draw(dev, mModel);
+        mShader->Draw(dev, this);
     }
 }
 

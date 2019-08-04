@@ -24,7 +24,7 @@ namespace ME
 
         void Render(DeviceResources* dev);
 
-    private:
+    public:
         Model* mModel = nullptr;
         ShaderProgram* mShader = nullptr;
     };

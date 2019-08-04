@@ -17,6 +17,7 @@
     <ClCompile Include="code\InputSystem\InputSystem.cpp" />
     <ClCompile Include="code\BuiltInAssets\Shaders\Shaders.cpp" />
     <ClCompile Include="code\Graphics\VertexLayout\VertexLayout.cpp" />
+    <ClCompile Include="code\Transform\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Libraries\Containers.h" />
@@ -42,5 +43,6 @@
     <ClInclude Include="code\InputSystem\InputSystem.h" />
     <ClInclude Include="code\BuiltInAssets\Shaders\Shaders.h" />
     <ClInclude Include="code\Graphics\VertexLayout\VertexLayout.h" />
+    <ClInclude Include="code\Transform\Transform.h" />
   </ItemGroup>
 </Project>
