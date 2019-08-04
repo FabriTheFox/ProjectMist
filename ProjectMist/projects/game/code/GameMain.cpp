@@ -51,8 +51,13 @@ int main()
 
     auto& es = e.EntitySystem;
     auto& en = es.CreateEntity("Liya");
+    auto& en2 = es.CreateEntity("Liya2");
+
+    en.mTransform.mPosition.x = 1;
+    en2.mTransform.mPosition.x = -1;
 
     en.AddComponent(ME::RendererComp::sGetRTTI());
+    en2.AddComponent(ME::RendererComp::sGetRTTI());
 
     while (true)
     {
