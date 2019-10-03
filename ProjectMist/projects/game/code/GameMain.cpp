@@ -16,6 +16,8 @@
 
 #include <Graphics/RendererComp/RendererComp.h>
 
+#include <Transform/Camera/Camera.h>
+
 class lmao
 {
 public:
@@ -48,6 +50,7 @@ int main()
     
     auto& g = e.Graphics;
     g.Initialize();
+    g.mCamera = new ME::Camera;
 
     auto& es = e.EntitySystem;
     auto& en = es.CreateEntity("Liya");
@@ -57,7 +60,12 @@ int main()
     en2.mTransform.mPosition.x = -1;
 
     en.AddComponent(ME::RendererComp::sGetRTTI());
+    auto& rcmp = en.GetComponent<ME::RendererComp>();
+    rcmp.mCamera = g.mCamera;
+
     en2.AddComponent(ME::RendererComp::sGetRTTI());
+    auto& rcmp2 = en2.GetComponent<ME::RendererComp>();
+    rcmp2.mCamera = g.mCamera;
 
     while (true)
     {

@@ -10,6 +10,7 @@ namespace ME
     class DeviceResources;
     class Model;
     class ShaderProgram;
+    class Camera;
 
     class MISTENGINE_DLL RendererComp : public Component
     {
@@ -23,6 +24,8 @@ namespace ME
         void OnUpdate();
 
         void Render(DeviceResources* dev);
+
+        Camera* mCamera = nullptr;
 
     public:
         Model* mModel = nullptr;

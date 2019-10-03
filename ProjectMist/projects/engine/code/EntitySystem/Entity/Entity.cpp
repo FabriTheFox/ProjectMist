@@ -20,7 +20,7 @@ namespace ME
         }
     }
 
-    const Component& Entity::AddComponent(const RTTI& type)
+    Component& Entity::AddComponent(const RTTI& type)
     {
         auto& comp = mComponents[type];
         
@@ -37,7 +37,7 @@ namespace ME
         return *comp;
     }
 
-    const Component& Entity::GetComponent(const RTTI& type)
+    Component& Entity::GetComponent(const RTTI& type)
     {
         auto& comp = mComponents[type];
 

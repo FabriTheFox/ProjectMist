@@ -21,8 +21,22 @@ namespace ME
         Entity(EntitySystem* entitysys = nullptr, const String& name = "");
         ~Entity();
 
-        const Component& AddComponent(const RTTI& type);
-        const Component& GetComponent(const RTTI& type);
+        Component& AddComponent(const RTTI& type);
+        Component& GetComponent(const RTTI& type);
+
+        template <typename T>
+        T& GetComponent()
+        {
+            auto& comp = mComponents[T::sGetRTTI()];
+
+            if (!comp)
+            {
+                _ASSERT_EXPR(false, "Component does not exist");
+            }
+
+            return *static_cast<T*>(comp);
+        }
+
 
     public:
         Transform3D mTransform;

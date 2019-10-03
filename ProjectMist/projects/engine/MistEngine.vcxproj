@@ -25,6 +25,13 @@
     <ClCompile Include="code\EntitySystem\Entity\Entity.cpp" />
     <ClCompile Include="code\Engine\MistEngine.cpp" />
     <ClCompile Include="code\Engine\System\System.cpp" />
+    <ClCompile Include="code\External\Imgui\imgui.cpp" />
+    <ClCompile Include="code\External\Imgui\imgui_demo.cpp" />
+    <ClCompile Include="code\External\Imgui\imgui_draw.cpp" />
+    <ClCompile Include="code\External\Imgui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="code\External\Imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="code\External\Imgui\imgui_widgets.cpp" />
+    <ClCompile Include="code\Transform\Camera\Camera.cpp" />
     <ClCompile Include="code\Graphics\DeviceResources.cpp" />
     <ClCompile Include="code\Graphics\Graphics.cpp" />
     <ClCompile Include="code\Graphics\VertexLayout\VertexLayout.cpp" />
@@ -47,6 +54,7 @@
     <ClInclude Include="code\Engine\MistEngineDefs.h" />
     <ClInclude Include="code\Engine\System\System.h" />
     <ClInclude Include="code\EventSystem\EventSystem.h" />
+    <ClInclude Include="code\Transform\Camera\Camera.h" />
     <ClInclude Include="code\Graphics\DeviceResources.h" />
     <ClInclude Include="code\Graphics\Graphics.h" />
     <ClInclude Include="code\Graphics\VertexLayout\VertexLayout.h" />

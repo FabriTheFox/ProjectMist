@@ -10,7 +10,7 @@ namespace ME
     public:
         Transform3D();
 
-        DirectX::XMFLOAT4X4 GetMatrix();
+        Mat4 GetMatrix();
 
         Vec3 mPosition;
         Vec3 mScale;

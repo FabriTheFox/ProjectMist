@@ -18,6 +18,13 @@
     <ClCompile Include="code\BuiltInAssets\Shaders\Shaders.cpp" />
     <ClCompile Include="code\Graphics\VertexLayout\VertexLayout.cpp" />
     <ClCompile Include="code\Transform\Transform.cpp" />
+    <ClCompile Include="code\Transform\Camera\Camera.cpp" />
+    <ClCompile Include="code\External\Imgui\imgui.cpp" />
+    <ClCompile Include="code\External\Imgui\imgui_widgets.cpp" />
+    <ClCompile Include="code\External\Imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="code\External\Imgui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="code\External\Imgui\imgui_draw.cpp" />
+    <ClCompile Include="code\External\Imgui\imgui_demo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Libraries\Containers.h" />
@@ -44,5 +51,6 @@
     <ClInclude Include="code\BuiltInAssets\Shaders\Shaders.h" />
     <ClInclude Include="code\Graphics\VertexLayout\VertexLayout.h" />
     <ClInclude Include="code\Transform\Transform.h" />
+    <ClInclude Include="code\Transform\Camera\Camera.h" />
   </ItemGroup>
 </Project>

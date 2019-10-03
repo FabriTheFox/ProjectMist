@@ -9,9 +9,9 @@ namespace ME
     {
     }
 
-    DirectX::XMFLOAT4X4 Transform3D::GetMatrix()
+    Mat4 Transform3D::GetMatrix()
     {
-        DirectX::XMFLOAT4X4 matrix;
+        Mat4 matrix;
 
         DirectX::XMStoreFloat4x4(&matrix, DirectX::XMMatrixTranspose(
               DirectX::XMMatrixScaling(mScale.x, mScale.y, mScale.z)

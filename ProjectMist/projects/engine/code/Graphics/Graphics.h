@@ -11,9 +11,11 @@
 struct ID3D11Device;
 class DeviceResources;
 
+
 namespace ME
 {
     class RendererComp;
+    class Camera;
 
     class MISTENGINE_DLL Graphics : public System
     {
@@ -24,6 +26,8 @@ namespace ME
         void Initialize();
         void Update();
         void Render();
+
+        Camera* mCamera;
 
     private:
         void RegisterComponent(RendererComp* renderer);

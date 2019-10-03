@@ -3,6 +3,11 @@
 #include <Engine/MistEngine.h>
 #include <iostream>
 #include <Graphics/RendererComp/RendererComp.h>
+#include <Transform/Camera/Camera.h>
+
+#include <External/Imgui/imgui.h>
+#include <External/Imgui/imgui_impl_win32.h>
+#include <External/Imgui/imgui_impl_dx11.h>
 
 namespace ME
 {
@@ -11,6 +16,8 @@ namespace ME
         mDeviceResources.CreateDeviceResources();
         mDeviceResources.CreateWindowResources((HWND)GetEngine().Terminal.GetWindow().m_WindowHandle);
         mDeviceResources.ConfigureBackBuffer();
+
+        ImGui_ImplDX11_Init(mDeviceResources.m_pd3dDevice, mDeviceResources.m_pd3dDeviceContext);
     }
 
     void Graphics::Update()
@@ -32,13 +39,26 @@ namespace ME
         context->ClearRenderTargetView(renderTarget, teal);
         context->ClearDepthStencilView(depthStencil, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
+        // Start the Dear ImGui frame
+        ImGui_ImplDX11_NewFrame();
+        ImGui_ImplWin32_NewFrame();
+        ImGui::NewFrame();
+
+        static bool open = true;
+        ImGui::ShowDemoWindow(&open);
+
         // Set the render target.
         context->OMSetRenderTargets(1, &renderTarget, depthStencil);
 
+        mCamera->UpdateMatrices();
         for (auto& rend : mRenderables.mComponents)
         {
             static_cast<RendererComp*>(rend)->Render(&mDeviceResources);
         }
+
+        ImGui::Render();
+        context->OMSetRenderTargets(1, &renderTarget, depthStencil);
+        ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
         mDeviceResources.Present();
     }

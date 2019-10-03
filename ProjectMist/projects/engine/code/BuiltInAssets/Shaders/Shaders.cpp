@@ -3,6 +3,7 @@
 #include <Graphics/Model/Model.h>
 #include <Graphics/RendererComp/RendererComp.h>
 #include <EntitySystem/Entity/Entity.h>
+#include <Transform/Camera/Camera.h>
 
 #include <d3d11_4.h>
 
@@ -42,6 +43,9 @@ namespace ME
         ID3D11DeviceContext* context = dev->m_pd3dDeviceContext;
 
         mVM.world = comp->GetOwner()->mTransform.GetMatrix();
+        mVM.view = comp->mCamera->GetViewMatrix();
+        mVM.projection = comp->mCamera->GetProjectionMatrix();
+
         context->UpdateSubresource(m_pConstantBuffer, 0, nullptr, &mVM, 0, 0);
 
         // Set up the IA stage by setting the input topology and layout.
