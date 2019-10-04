@@ -41,8 +41,8 @@
     <ClCompile Include="code\Graphics\Shader\Shader.cpp" />
     <ClCompile Include="code\InputSystem\InputSystem.cpp" />
     <ClCompile Include="code\Transform\Transform.cpp" />
-    <ClCompile Include="code\Terminal\Terminal.cpp" />
-    <ClCompile Include="code\Terminal\Window.cpp" />
+    <ClCompile Include="code\Window\Terminal.cpp" />
+    <ClCompile Include="code\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\BuiltInAssets\Shaders\Shaders.h" />
@@ -68,8 +68,8 @@
     <ClInclude Include="code\Libraries\Memory.h" />
     <ClInclude Include="code\Transform\Transform.h" />
     <ClInclude Include="code\RTTI\RTTI.h" />
-    <ClInclude Include="code\Terminal\Terminal.h" />
-    <ClInclude Include="code\Terminal\Window.h" />
+    <ClInclude Include="code\Window\Terminal.h" />
+    <ClInclude Include="code\Window\Window.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

@@ -3,7 +3,7 @@
 namespace ME
 {
     MistEngine::MistEngine() 
-        : Terminal(*this)
+        : Window(*this)
         , Graphics(*this)
         , EntitySystem(*this)
     {

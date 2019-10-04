@@ -14,7 +14,7 @@ namespace ME
     void Graphics::Initialize()
     {
         mDeviceResources.CreateDeviceResources();
-        mDeviceResources.CreateWindowResources((HWND)GetEngine().Terminal.GetWindow().m_WindowHandle);
+        mDeviceResources.CreateWindowResources((HWND)GetEngine().Window.m_WindowHandle);
         mDeviceResources.ConfigureBackBuffer();
 
         ImGui_ImplDX11_Init(mDeviceResources.m_pd3dDevice, mDeviceResources.m_pd3dDeviceContext);

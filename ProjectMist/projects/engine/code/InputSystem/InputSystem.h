@@ -10,6 +10,6 @@ namespace ME
         SYSTEM_DECLARATION(InputSystem);
     public:
 
-
+    private:
     };
 }

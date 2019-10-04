@@ -3,7 +3,7 @@
 #include <Engine/ClassQualifiers/ClassQualifiers.h>
 
 #include <Graphics/Graphics.h>
-#include <Terminal/Terminal.h>
+#include <Window/Window.h>
 #include <EntitySystem/EntitySystem.h>
 
 namespace ME
@@ -15,7 +15,7 @@ namespace ME
         MistEngine();
 
         Graphics Graphics;
-        Terminal Terminal;
+        Window Window;
         EntitySystem EntitySystem;
 
     private:

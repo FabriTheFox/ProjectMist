@@ -1,5 +1,5 @@
 #include <Engine/MistEngineDefs.h>
-#include <Terminal/Terminal.h>
+#include <Window/Terminal.h>
 #include <EventSystem/EventSystem.h>
 
 #include <Windows.h>
@@ -43,10 +43,9 @@ int main()
     float rrr = aa.lm.r;
 
     ME::MistEngine e;
-    auto& t = e.Terminal;
-    t.GetWindow().SetWindowName("Liya");
-    auto& w = t.GetWindow();
-    w.CreateTheWindow();
+    auto& t = e.Window;
+    t.SetWindowName("Liya");
+    t.CreateTheWindow();
     
     auto& g = e.Graphics;
     g.Initialize();
@@ -69,7 +68,17 @@ int main()
 
     while (true)
     {
-        w.ProcessWindowMessages();
+        t.ProcessWindowMessages();
+
+        if (t.mTerminal.IsKeyDown(VK_SPACE))
+        {
+            std::cout << "Key down" << std::endl;
+        }
+
+        //if (t.mTerminal.IsKeyUp(VK_LBUTTON))
+        //{
+        //    std::cout << "Key up" << std::endl;
+        //}
 
         g.Update();
         g.Render();
