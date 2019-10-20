@@ -17,6 +17,10 @@ namespace ME
         System(MistEngine& engine) : mEngine(engine) {}
         System() = delete;
 
+        virtual void Initialize(){}
+        virtual void Update(){}
+        virtual void Shutdown(){}
+
         MistEngine& GetEngine() { return mEngine; }
 
     protected:

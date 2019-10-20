@@ -5,6 +5,7 @@
 #include <Graphics/Graphics.h>
 #include <Window/Window.h>
 #include <EntitySystem/EntitySystem.h>
+#include <InputSystem/InputSystem.h>
 
 namespace ME
 {
@@ -14,9 +15,14 @@ namespace ME
     public:
         MistEngine();
 
+        void Initialize();
+        void Update();
+        void ShutDown();
+
         Graphics Graphics;
         Window Window;
         EntitySystem EntitySystem;
+        InputSystem InputSystem;
 
     private:
     };

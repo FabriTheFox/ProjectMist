@@ -18,7 +18,7 @@ namespace ME
 #undef CreateWindow
     void Window::CreateTheWindow()
     {
-        dr = new DeviceResources;
+        mDeviceResources = new DeviceResources;
 
         // Register the window class.
         const char CLASS_NAME[] = "Window claaaazz";
@@ -44,7 +44,7 @@ namespace ME
         );
 
         // Create the window.
-        m_WindowHandle = CreateWindowEx(
+        mWindowHandle = CreateWindowEx(
             0,                              // Optional window styles.
             CLASS_NAME,                     // Window class
             "LMAO",                         // Window text
@@ -59,12 +59,12 @@ namespace ME
             NULL                // Additional application data
         );
 
-        if (m_WindowHandle == NULL)
+        if (mWindowHandle == NULL)
         {
             return;
         }
 
-        ShowWindow((HWND)m_WindowHandle, SW_SHOWNORMAL);
+        ShowWindow((HWND)mWindowHandle, SW_SHOWNORMAL);
 
         //dr->CreateDeviceResources();
         //dr->CreateWindowResources((HWND)m_WindowHandle);
@@ -100,17 +100,27 @@ namespace ME
         //ImGui::StyleColorsClassic();
 
         // Setup Platform/Renderer bindings
-        ImGui_ImplWin32_Init(m_WindowHandle);
+        ImGui_ImplWin32_Init(mWindowHandle);
     }
 
     void Window::SetWindowName(const String& name)
     {
-        m_WindowName = name;
+        mWindowName = name;
     }
 
-    const String& Window::GetWindowName()
+    void Window::Initialize()
     {
-        return m_WindowName;
+        CreateTheWindow();
+    }
+
+    void Window::Update()
+    {
+        ProcessWindowMessages();
+    }
+
+    void Window::Shutdown()
+    {
+
     }
 
     void Window::ProcessWindowMessages()

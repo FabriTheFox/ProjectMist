@@ -43,12 +43,12 @@ int main()
     float rrr = aa.lm.r;
 
     ME::MistEngine e;
+    e.Initialize();
+
     auto& t = e.Window;
     t.SetWindowName("Liya");
-    t.CreateTheWindow();
     
     auto& g = e.Graphics;
-    g.Initialize();
     g.mCamera = new ME::Camera;
 
     auto& es = e.EntitySystem;
@@ -68,12 +68,26 @@ int main()
 
     while (true)
     {
-        t.ProcessWindowMessages();
+        e.Window.Update();
+        e.InputSystem.Update();
 
-        if (t.mTerminal.IsKeyDown(VK_SPACE))
+        if (e.InputSystem.IsKeyIdle('A'))
         {
-            std::cout << "Key down" << std::endl;
+            std::cout << "Idle" << std::endl;
         }
+        if (e.InputSystem.IsKeyTriggered('A'))
+        {
+            std::cout << "Triggered" << std::endl;
+        }
+        if (e.InputSystem.IsKeyPressed('A'))
+        {
+            std::cout << "Pressed" << std::endl;
+        }
+        if (e.InputSystem.IsKeyReleased('A'))
+        {
+            std::cout << "Released" << std::endl;
+        }
+
 
         //if (t.mTerminal.IsKeyUp(VK_LBUTTON))
         //{
@@ -85,6 +99,8 @@ int main()
 
         Sleep(16);
     }
+
+    e.ShutDown();
 
     return 0;
 }

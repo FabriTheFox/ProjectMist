@@ -23,8 +23,10 @@ namespace ME
         friend class RendererComp;
     public:
 
-        void Initialize();
-        void Update();
+        void Initialize() override final;
+        void Update() override final;
+        void Shutdown() override final;
+
         void Render();
 
         Camera* mCamera;

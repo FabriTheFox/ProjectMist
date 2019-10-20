@@ -15,22 +15,25 @@ namespace ME
         SYSTEM_DECLARATION(Window);
 
     public:
-        Window();
-
-        void CreateTheWindow();
+        void Initialize() override final;
+        void Update() override final;
+        void Shutdown() override final;
 
         void SetWindowName(const String& name);
-        const String& GetWindowName();
 
-        void ProcessWindowMessages();
+        const String& GetWindowName() { return mWindowName; }
+        void* GetWindowHandle() { return mWindowHandle; }
 
         Terminal mTerminal;
 
-    //private:
-        String m_WindowName;
-        void* m_WindowHandle;
+    private:
+        void CreateTheWindow();
+        void ProcessWindowMessages();
 
-        DeviceResources* dr;
+        String mWindowName;
+        void* mWindowHandle;
+
+        DeviceResources* mDeviceResources;
     };
 }
 
