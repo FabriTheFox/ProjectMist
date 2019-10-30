@@ -17,6 +17,7 @@
 #include <Graphics/RendererComp/RendererComp.h>
 
 #include <Transform/Camera/Camera.h>
+#include <Transform/Camera/FreeCamera.h>
 
 class lmao
 {
@@ -49,7 +50,7 @@ int main()
     t.SetWindowName("Liya");
     
     auto& g = e.Graphics;
-    g.mCamera = new ME::Camera;
+    g.mCamera = new ME::FreeCamera;
 
     auto& es = e.EntitySystem;
     auto& en = es.CreateEntity("Liya");
@@ -66,33 +67,16 @@ int main()
     auto& rcmp2 = en2.GetComponent<ME::RendererComp>();
     rcmp2.mCamera = g.mCamera;
 
+    //g.mCamera->mEyePosition.m128_f32[2] = 1;
+
     while (true)
     {
         e.Window.Update();
         e.InputSystem.Update();
 
-        if (e.InputSystem.IsKeyIdle('A'))
-        {
-            std::cout << "Idle" << std::endl;
-        }
-        if (e.InputSystem.IsKeyTriggered('A'))
-        {
-            std::cout << "Triggered" << std::endl;
-        }
-        if (e.InputSystem.IsKeyPressed('A'))
-        {
-            std::cout << "Pressed" << std::endl;
-        }
-        if (e.InputSystem.IsKeyReleased('A'))
-        {
-            std::cout << "Released" << std::endl;
-        }
+        auto pos = e.InputSystem.GetMouseMovement();
 
-
-        //if (t.mTerminal.IsKeyUp(VK_LBUTTON))
-        //{
-        //    std::cout << "Key up" << std::endl;
-        //}
+        g.mCamera->HandleInput(e.InputSystem);
 
         g.Update();
         g.Render();

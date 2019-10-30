@@ -12,9 +12,9 @@ namespace ME
 
         Mat4 GetMatrix();
 
-        Vec3 mPosition;
-        Vec3 mScale;
-        Vec3 mRotation;
+        FVec3 mPosition;
+        FVec3 mScale;
+        FVec3 mRotation;
 
     private:
     };

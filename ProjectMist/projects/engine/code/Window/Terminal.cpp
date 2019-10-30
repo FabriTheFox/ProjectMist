@@ -1,5 +1,5 @@
 #include "Terminal.h"
-
+#include <Windowsx.h>
 #include <iostream>
 
 // Win32 message handler
@@ -7,8 +7,12 @@ extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam
 
 namespace ME
 {
+    RTTI_IMPLEMENTATION(WindowEvent);
+
     char Terminal::mKeyboardKeyStatus[VIRTUAL_KEY_COUNT];
     char Terminal::mMouseButtonStatus[MOUSE_BUTTON_COUNT];
+    int Terminal::mMousePos[2];
+    EventSystem Terminal::mEventSystem;
 
     Terminal::Terminal()
     {
@@ -69,8 +73,6 @@ namespace ME
         {
             mMouseButtonStatus[0] = KEY_DOWN;
             break;
-            //int xPos = GET_X_LPARAM(lParam);
-            //int yPos = GET_Y_LPARAM(lParam);
         }
         case WM_RBUTTONDOWN:
         {
@@ -95,6 +97,27 @@ namespace ME
         case WM_MBUTTONUP:
         {
             mMouseButtonStatus[2] = KEY_UP;
+            break;
+        }
+        case WM_MOUSEMOVE:
+        {
+            mMousePos[0] = GET_X_LPARAM(lParam);
+            mMousePos[1] = GET_Y_LPARAM(lParam);
+            break;
+        }
+
+        case WM_CAPTURECHANGED:
+        case WM_MOUSELEAVE:
+        case WM_MOUSEHOVER:
+        case WM_MOUSEACTIVATE:
+            break;
+
+        case WM_ACTIVATE:
+        {
+            if(wParam == WA_INACTIVE)
+                mEventSystem.DispatchEvent(WindowEvent(WindowEvent::WindowStatus::DEACTIVATE));
+            else
+                mEventSystem.DispatchEvent(WindowEvent(WindowEvent::WindowStatus::ACTIVATE));
             break;
         }
         case WM_CLOSE:

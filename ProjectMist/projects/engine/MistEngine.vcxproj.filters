@@ -25,6 +25,8 @@
     <ClCompile Include="code\External\Imgui\imgui_demo.cpp" />
     <ClCompile Include="code\Window\Terminal.cpp" />
     <ClCompile Include="code\Window\Window.cpp" />
+    <ClCompile Include="code\Transform\Camera\FreeCamera.cpp" />
+    <ClCompile Include="code\EventSystem\EventSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Libraries\Containers.h" />
@@ -52,5 +54,7 @@
     <ClInclude Include="code\Transform\Camera\Camera.h" />
     <ClInclude Include="code\Window\Terminal.h" />
     <ClInclude Include="code\Window\Window.h" />
+    <ClInclude Include="code\Transform\Camera\FreeCamera.h" />
+    <ClInclude Include="code\InputSystem\InputKeyCodes.h" />
   </ItemGroup>
 </Project>

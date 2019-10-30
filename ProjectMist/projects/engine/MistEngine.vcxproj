@@ -25,6 +25,7 @@
     <ClCompile Include="code\EntitySystem\Entity\Entity.cpp" />
     <ClCompile Include="code\Engine\MistEngine.cpp" />
     <ClCompile Include="code\Engine\System\System.cpp" />
+    <ClCompile Include="code\EventSystem\EventSystem.cpp" />
     <ClCompile Include="code\External\Imgui\imgui.cpp" />
     <ClCompile Include="code\External\Imgui\imgui_demo.cpp" />
     <ClCompile Include="code\External\Imgui\imgui_draw.cpp" />
@@ -40,6 +41,7 @@
     <ClCompile Include="code\Graphics\RenderPipeline\RenderPipeline.cpp" />
     <ClCompile Include="code\Graphics\Shader\Shader.cpp" />
     <ClCompile Include="code\InputSystem\InputSystem.cpp" />
+    <ClCompile Include="code\Transform\Camera\FreeCamera.cpp" />
     <ClCompile Include="code\Transform\Transform.cpp" />
     <ClCompile Include="code\Window\Terminal.cpp" />
     <ClCompile Include="code\Window\Window.cpp" />
@@ -54,6 +56,7 @@
     <ClInclude Include="code\Engine\MistEngineDefs.h" />
     <ClInclude Include="code\Engine\System\System.h" />
     <ClInclude Include="code\EventSystem\EventSystem.h" />
+    <ClInclude Include="code\InputSystem\InputKeyCodes.h" />
     <ClInclude Include="code\Transform\Camera\Camera.h" />
     <ClInclude Include="code\Graphics\DeviceResources.h" />
     <ClInclude Include="code\Graphics\Graphics.h" />
@@ -66,6 +69,7 @@
     <ClInclude Include="code\Libraries\Containers.h" />
     <ClInclude Include="code\Libraries\Math.h" />
     <ClInclude Include="code\Libraries\Memory.h" />
+    <ClInclude Include="code\Transform\Camera\FreeCamera.h" />
     <ClInclude Include="code\Transform\Transform.h" />
     <ClInclude Include="code\RTTI\RTTI.h" />
     <ClInclude Include="code\Window\Terminal.h" />

@@ -51,19 +51,7 @@ namespace ME
 
     void RendererComp::OnUpdate()
     {
-        ColorShader::ConstantBufferStruct& mv = static_cast<ColorShader*>(mShader)->mVM;
-
-        static unsigned int m_frameCount = 0;
-
-        float r0 = DirectX::XMConvertToRadians((float)(m_frameCount % 360));
-        float r1 = DirectX::XMConvertToRadians((float)((m_frameCount * 2) % 360));
-        float r2 = DirectX::XMConvertToRadians((float)((m_frameCount * 4) % 360));
         
-        GetTransform().mRotation = {0, r1, 0};
-        
-        ++m_frameCount;
-        
-        if (m_frameCount == MAXUINT)  m_frameCount = 0;
     }
 
     void RendererComp::Render(DeviceResources* dev)

@@ -11,11 +11,8 @@ namespace ME
 {
     class Event : public IDynamic
     {
-        RTTI_DECLARATION(Event);
-    public:
+        RTTI_DECLARATION_DLL(Event, MISTENGINE_DLL);
     };
-
-    RTTI_IMPLEMENTATION(Event);
 
     class EventSystem
     {
@@ -157,9 +154,10 @@ namespace ME
         template <typename Ev, typename Obj>
         class EventDispatcherMember : public IEventDispatcher
         {
-            RTTI_DECLARATION(EventDispatcherMember);
+            RTTI_DECLARATION_DLL(EventDispatcherMember, MISTENGINE_DLL);
         public:
             typedef void (Obj::*ListenerFunc)(const Ev&);
+            EventDispatcherMember() = default;
             EventDispatcherMember(ListenerFunc listener, Obj* instance) : m_Function(listener), m_Instance(instance) {}
             bool Dispatch(Event* theevent) const override final { (m_Instance->*m_Function)(*((Ev*)theevent)); return true; }
 
@@ -170,9 +168,10 @@ namespace ME
         template <typename Ev, typename Obj>
         class EventDispatcherMemberWk : public IEventDispatcher
         {
-            RTTI_DECLARATION(EventDispatcherMemberWk);
+            RTTI_DECLARATION_DLL(EventDispatcherMemberWk, MISTENGINE_DLL);
         public:
             typedef void (Obj::*ListenerFunc)(const Ev&);
+            EventDispatcherMemberWk() = default;
             EventDispatcherMemberWk(ListenerFunc listener, WPtr<Obj> instance) : m_Function(listener), m_Instance(instance) {}
             bool Dispatch(Event* theevent) const override final
             {
@@ -190,9 +189,10 @@ namespace ME
         template <typename Ev>
         class EventDispatcher : public IEventDispatcher
         {
-            RTTI_DECLARATION(EventDispatcher);
+            RTTI_DECLARATION_DLL(EventDispatcher, MISTENGINE_DLL);
         public:
             typedef void (*ListenerFunc)(const Ev&);
+            EventDispatcher() = default;
             EventDispatcher(ListenerFunc listener) : m_Function(listener) {}
             bool Dispatch(Event* theevent) const override final { (m_Function)(*((Ev*)theevent)); return true; }
 
@@ -202,8 +202,6 @@ namespace ME
         using DispatcherArray = std::vector<UPtr<IEventDispatcher>>;
         std::map<RTTI, DispatcherArray> m_Dispatchers;
     };
-
-    //RTTI_IMPLEMENTATION(EventSystem);
 
     RTTI_IMPLEMENTATION_TEMPLATE(EventSystem::EventDispatcherMember, Ev, Obj);
     RTTI_IMPLEMENTATION_TEMPLATE(EventSystem::EventDispatcherMemberWk, Ev, Obj);

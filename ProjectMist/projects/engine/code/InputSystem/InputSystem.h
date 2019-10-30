@@ -3,9 +3,12 @@
 #include <Engine/MistEngineDefs.h>
 #include <Engine/System/System.h>
 #include <Libraries/Containers.h>
+#include <Libraries/Math.h>
 
 namespace ME
 {
+    class WindowEvent;
+
     class MISTENGINE_DLL InputSystem : public System
     {
         SYSTEM_DECLARATION(InputSystem);
@@ -20,6 +23,9 @@ namespace ME
         static const char KEY_TRIGGERED = 2;
         static const char KEY_RELEASED = 3;
 
+        IVec2 GetMouseMovement() const { return { mCurrentMousePos[0] - mPreviousMousePos[0], mCurrentMousePos[1] - mPreviousMousePos[1] }; }
+        IVec2 GetMousePosition() const { return { mCurrentMousePos[0], mCurrentMousePos[1] }; }
+
         bool IsKeyIdle(unsigned key) const { return key < mCurrentKeyStatus.size() && mCurrentKeyStatus[key] == KEY_IDLE; }
         bool IsKeyPressed(unsigned key) const {return key < mCurrentKeyStatus.size() && mCurrentKeyStatus[key] == KEY_PRESSED;}
         bool IsKeyTriggered(unsigned key) const { return key < mCurrentKeyStatus.size() && mCurrentKeyStatus[key] == KEY_TRIGGERED; }
@@ -32,11 +38,19 @@ namespace ME
 
     private:
         void ResetInputStatus();
-        
+
+        // Events
+        void OnWindowEvent(const WindowEvent& ev);
+
+        bool mNeedsReset = false;
+
         std::vector<char>mPreviousKeyStatus;
         std::vector<char>mCurrentKeyStatus;
 
         std::vector<char>mCurrentMouseStatus;
         std::vector<char>mPreviousMouseStatus;
+
+        int mCurrentMousePos[2];
+        int mPreviousMousePos[2];
     };
 }

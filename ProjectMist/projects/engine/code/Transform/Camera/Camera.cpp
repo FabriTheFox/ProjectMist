@@ -4,25 +4,26 @@ namespace ME
 {
     void Camera::UpdateMatrices()
     {
-        DirectX::XMVECTOR eye = DirectX::XMVectorSet(0.0f, 0.7f, 1.5f, 0.f);
-        DirectX::XMVECTOR at = DirectX::XMVectorSet(0.0f, -0.1f, 0.0f, 0.f);
-        DirectX::XMVECTOR up = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.f);
-
-        DirectX::XMStoreFloat4x4(&mCameraMatrix, DirectX::XMMatrixTranspose(DirectX::XMMatrixLookAtRH(eye, at, up)));
+        DirectX::XMStoreFloat4x4(&mCameraMatrix, DirectX::XMMatrixTranspose(DirectX::XMMatrixLookAtRH(mEyePosition, mTargetPosition, mUpVector)));
 
         DirectX::XMStoreFloat4x4(
             &mProjectionMatrix,
             DirectX::XMMatrixTranspose(DirectX::XMMatrixPerspectiveFovRH(DirectX::XMConvertToRadians(mFOV_V), mAspectRatio, mNearPlane, mFarPlane)));
     }
 
-    Mat4 Camera::GetViewMatrix()
+    Mat4 Camera::GetViewMatrix() const
     {
         return mCameraMatrix;
     }
 
-    Mat4 Camera::GetProjectionMatrix()
+    Mat4 Camera::GetProjectionMatrix() const
     {
         return mProjectionMatrix;
+    }
+
+    Vec4 Camera::GetViewDirectionNormalized() const
+    {
+        return DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(mTargetPosition, mEyePosition));
     }
 }
 

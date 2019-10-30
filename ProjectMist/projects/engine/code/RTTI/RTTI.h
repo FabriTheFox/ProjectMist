@@ -13,7 +13,7 @@
 	public:																						        \
 	virtual const ME::RTTI& GetRTTI() const {return sm_RTTI;}									        \
 	static const ME::RTTI& sGetRTTI() {return sm_RTTI;}											        \
-	private: static const ME::RTTI& sm_RTTI;				                                            \
+	private: dll static const ME::RTTI& sm_RTTI;				                                        \
 
 #define RTTI_IMPLEMENTATION(thistype)													\
 	const ME::RTTI& thistype::sm_RTTI = ME::RTTISystem::RegisterRTTI<thistype>();	    \
@@ -109,7 +109,6 @@ namespace ME
     public:
         virtual const RTTI& GetRTTI() const = 0;
     protected:
-
     };
 }
 

@@ -4,12 +4,29 @@
 #include <Engine/System/System.h>
 #include <Graphics/Graphics.h>
 #include <RTTI/RTTI.h>
+#include <EventSystem/EventSystem.h>
 
 #include <Windows.h>
 #include <WinUser.h>
 
 namespace ME
 {
+    class WindowEvent : public ME::Event
+    {
+        RTTI_DECLARATION(WindowEvent);
+    public:
+        enum class WindowStatus
+        {
+            INVALID,
+            ACTIVATE,
+            DEACTIVATE
+        };
+
+        WindowEvent() = default;
+        WindowEvent(const WindowStatus& status) : mStatus(status) {}
+        WindowStatus mStatus = WindowStatus::INVALID;
+    };
+
     class MISTENGINE_DLL Terminal
     {
         friend class Window;
@@ -31,6 +48,9 @@ namespace ME
 
         static char mKeyboardKeyStatus[VIRTUAL_KEY_COUNT];
         static char mMouseButtonStatus[MOUSE_BUTTON_COUNT];
+        static int mMousePos[2];
+
+        static EventSystem mEventSystem;
 
     private:
         static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);

@@ -4,9 +4,11 @@
 
 namespace ME
 {
-    using Vec2 = DirectX::XMFLOAT2;
-    using Vec3 = DirectX::XMFLOAT3;
-    using Vec4 = DirectX::XMFLOAT4;
+    using Vec4 = DirectX::XMVECTOR;
+
+    using FVec2 = DirectX::XMFLOAT2;
+    using FVec3 = DirectX::XMFLOAT3;
+    using FVec4 = DirectX::XMFLOAT4;
 
     using IVec2 = DirectX::XMINT2;
     using IVec3 = DirectX::XMINT3;
