@@ -17,9 +17,9 @@ namespace ME
         System(MistEngine& engine) : mEngine(engine) {}
         System() = delete;
 
-        virtual void Initialize(){}
-        virtual void Update(){}
-        virtual void Shutdown(){}
+        virtual void OnInitialize(){}
+        virtual void OnUpdate(){}
+        virtual void OnShutdown(){}
 
         MistEngine& GetEngine() { return mEngine; }
 

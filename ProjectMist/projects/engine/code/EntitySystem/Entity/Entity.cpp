@@ -1,13 +1,14 @@
 #include "Entity.h"
 #include <EntitySystem/Component/Component.h>
 #include <EntitySystem/EntitySystem.h>
+#include <Engine/MistEngine.h>
 
 namespace ME
 {
     RTTI_IMPLEMENTATION(Entity);
 
-    Entity::Entity(EntitySystem* entitysys, const String& name)
-        : mEntitySystem(entitysys)
+    Entity::Entity(MistEngine* engine /*= nullptr*/, const String& name /*= ""*/)
+        : mEngine(engine)
         , mName(name)
     {
     }
@@ -15,9 +16,31 @@ namespace ME
     Entity::~Entity()
     {
         for (auto& comp : mComponents)
-        {
             comp.second->MarkForDeletion();
-        }
+    }
+
+    void Entity::OnEntityInitialize()
+    {
+        OnInitialize();
+
+        for (auto& comp : mComponents)
+            comp.second->OnInitialize();
+    }
+
+    void Entity::OnEntityUpdate()
+    {
+        OnUpdate();
+
+        for (auto& comp : mComponents)
+            comp.second->OnUpdate();
+    }
+
+    void Entity::OnEntityPredestroy()
+    {
+        OnPredestroy();
+
+        for (auto& comp : mComponents)
+            comp.second->OnPredestroy();
     }
 
     Component& Entity::AddComponent(const RTTI& type)
@@ -32,7 +55,7 @@ namespace ME
         comp = type.CreateRawAs<Component>();
         comp->mOwner = this;
 
-        comp->OnRegister(mEntitySystem->GetEngine());
+        comp->OnRegister(*mEngine);
 
         return *comp;
     }

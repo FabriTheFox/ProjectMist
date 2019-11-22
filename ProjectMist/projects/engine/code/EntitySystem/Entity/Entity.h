@@ -11,14 +11,17 @@ namespace ME
 {
     class Component;
     class EntitySystem;
+    class MistEngine;
 
     class MISTENGINE_DLL Entity : public IDynamic
     {
         RTTI_DECLARATION(Entity);
         NON_COPYABLE(Entity);
 
+        friend class EntitySystem;
+
     public:
-        Entity(EntitySystem* entitysys = nullptr, const String& name = "");
+        Entity(MistEngine* engine = nullptr, const String& name = "");
         ~Entity();
 
         Component& AddComponent(const RTTI& type);
@@ -37,12 +40,21 @@ namespace ME
             return *static_cast<T*>(comp);
         }
 
-
     public:
         Transform3D mTransform;
 
+    protected:
+        MistEngine* mEngine{ nullptr };
+
     private:
-        EntitySystem * mEntitySystem{nullptr};
+        void OnEntityInitialize();
+        void OnEntityUpdate();
+        void OnEntityPredestroy();
+
+        virtual void OnInitialize() {}
+        virtual void OnUpdate() {}
+        virtual void OnPredestroy() {}
+
         String mName;
         UnorderedMap<RTTI, Component*> mComponents;
     };

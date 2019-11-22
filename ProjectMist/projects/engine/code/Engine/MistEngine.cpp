@@ -8,30 +8,32 @@ namespace ME
         , EntitySystem(*this)
         , InputSystem(*this)
     {
-
     }
 
     void MistEngine::Initialize()
     {
-        Window.Initialize();
-        Graphics.Initialize();
-        EntitySystem.Initialize();
-        InputSystem.Initialize();
+        Window.OnInitialize();
+        Graphics.OnInitialize();
+        EntitySystem.OnInitialize();
+        InputSystem.OnInitialize();
     }
 
     void MistEngine::Update()
     {
-        //Window.Update();
-        //Graphics.Update();
-        //EntitySystem.Update();
-        //InputSystem.Update();
+        Window.OnUpdate();
+        InputSystem.OnUpdate();
+
+        EntitySystem.OnUpdate();
+
+        Graphics.OnUpdate();
+        Graphics.Render();
     }
 
     void MistEngine::ShutDown()
     {
-        InputSystem.Shutdown();
-        EntitySystem.Shutdown();
-        Graphics.Shutdown();
-        Window.Shutdown();
+        InputSystem.OnShutdown();
+        EntitySystem.OnShutdown();
+        Graphics.OnShutdown();
+        Window.OnShutdown();
     }
 }

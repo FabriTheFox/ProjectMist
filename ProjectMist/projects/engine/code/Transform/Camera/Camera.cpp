@@ -2,6 +2,13 @@
 
 namespace ME
 {
+    RTTI_IMPLEMENTATION(Camera);
+
+    Camera::Camera(MistEngine* engine /*= nullptr*/, const String& name /*= ""*/)
+        : Entity(engine, name)
+    {
+    }
+
     void Camera::UpdateMatrices()
     {
         DirectX::XMStoreFloat4x4(&mCameraMatrix, DirectX::XMMatrixTranspose(DirectX::XMMatrixLookAtRH(mEyePosition, mTargetPosition, mUpVector)));

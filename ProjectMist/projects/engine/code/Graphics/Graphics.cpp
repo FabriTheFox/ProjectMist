@@ -11,7 +11,7 @@
 
 namespace ME
 {
-    void Graphics::Initialize()
+    void Graphics::OnInitialize()
     {
         mDeviceResources.CreateDeviceResources();
         mDeviceResources.CreateWindowResources((HWND)GetEngine().Window.GetWindowHandle());
@@ -20,7 +20,7 @@ namespace ME
         ImGui_ImplDX11_Init(mDeviceResources.m_pd3dDevice, mDeviceResources.m_pd3dDeviceContext);
     }
 
-    void Graphics::Update()
+    void Graphics::OnUpdate()
     {
         for (auto& rend : mRenderables.mComponents)
         {
@@ -28,7 +28,7 @@ namespace ME
         }
     }
 
-    void Graphics::Shutdown()
+    void Graphics::OnShutdown()
     {
     }
 

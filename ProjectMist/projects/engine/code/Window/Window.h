@@ -15,9 +15,9 @@ namespace ME
         SYSTEM_DECLARATION(Window);
 
     public:
-        void Initialize() override final;
-        void Update() override final;
-        void Shutdown() override final;
+        void OnInitialize() override final;
+        void OnUpdate() override final;
+        void OnShutdown() override final;
 
         void SetWindowName(const String& name);
 

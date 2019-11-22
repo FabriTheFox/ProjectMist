@@ -6,12 +6,17 @@
 namespace ME
 {
     class InputSystem;
+    class MistEngine;
 
-    class Camera
+    class Camera : public Entity
     {
+        RTTI_DECLARATION(Camera);
+        NON_COPYABLE(Camera);
+
     public:
-        virtual void Update() {}
-        virtual void HandleInput(const InputSystem& inputsystem) { UNUSED_PARAM(inputsystem); }
+        Camera(MistEngine* engine = nullptr, const String& name = "");
+
+        //virtual void OnUpdate() override {}
 
         void UpdateMatrices();
         Mat4 GetViewMatrix() const;

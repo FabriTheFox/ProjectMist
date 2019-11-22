@@ -5,17 +5,19 @@ namespace ME
 {
     void EntitySystem::OnInitialize()
     {
-
+        for (auto& en : mEntities)
+            en->OnEntityInitialize();
     }
 
     void EntitySystem::OnUpdate()
     {
-
+        for (auto& en : mEntities)
+            en->OnEntityUpdate();
     }
 
     Entity& EntitySystem::CreateEntity(const String& name)
     {
-        mEntities.push_back(new Entity(this, name));
+        mEntities.push_back(new Entity(&GetEngine(), name));
         return *mEntities.back();
     }
 }

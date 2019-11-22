@@ -48,13 +48,13 @@ int main()
 
     auto& t = e.Window;
     t.SetWindowName("Liya");
-    
-    auto& g = e.Graphics;
-    g.mCamera = new ME::FreeCamera;
 
     auto& es = e.EntitySystem;
     auto& en = es.CreateEntity("Liya");
     auto& en2 = es.CreateEntity("Liya2");
+
+    auto& g = e.Graphics;
+    g.mCamera = &es.CreateEntity<ME::FreeCamera>("MainCamera");
 
     en.mTransform.mPosition.x = 1;
     en2.mTransform.mPosition.x = -1;
@@ -67,20 +67,9 @@ int main()
     auto& rcmp2 = en2.GetComponent<ME::RendererComp>();
     rcmp2.mCamera = g.mCamera;
 
-    //g.mCamera->mEyePosition.m128_f32[2] = 1;
-
     while (true)
     {
-        e.Window.Update();
-        e.InputSystem.Update();
-
-        auto pos = e.InputSystem.GetMouseMovement();
-
-        g.mCamera->HandleInput(e.InputSystem);
-
-        g.Update();
-        g.Render();
-
+        e.Update();
         Sleep(16);
     }
 

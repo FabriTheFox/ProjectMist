@@ -14,14 +14,18 @@ namespace ME
         SYSTEM_DECLARATION(InputSystem);
     public:
 
-        void Initialize() override final;
-        void Update() override final;
-        void Shutdown() override final;
+        void OnInitialize() override final;
+        void OnUpdate() override final;
+        void OnShutdown() override final;
 
         static const char KEY_IDLE = 0;
         static const char KEY_PRESSED = 1;
         static const char KEY_TRIGGERED = 2;
         static const char KEY_RELEASED = 3;
+
+        static const unsigned MOUSE_BUTTON_LEFT = 0;
+        static const unsigned MOUSE_BUTTON_RIGHT = 1;
+        static const unsigned MOUSE_BUTTON_MIDDLE = 2;
 
         IVec2 GetMouseMovement() const { return { mCurrentMousePos[0] - mPreviousMousePos[0], mCurrentMousePos[1] - mPreviousMousePos[1] }; }
         IVec2 GetMousePosition() const { return { mCurrentMousePos[0], mCurrentMousePos[1] }; }

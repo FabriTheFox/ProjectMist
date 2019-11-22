@@ -108,17 +108,17 @@ namespace ME
         mWindowName = name;
     }
 
-    void Window::Initialize()
+    void Window::OnInitialize()
     {
         CreateTheWindow();
     }
 
-    void Window::Update()
+    void Window::OnUpdate()
     {
         ProcessWindowMessages();
     }
 
-    void Window::Shutdown()
+    void Window::OnShutdown()
     {
 
     }

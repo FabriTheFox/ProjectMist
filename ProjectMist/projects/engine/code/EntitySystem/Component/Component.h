@@ -22,7 +22,7 @@ namespace ME
         virtual void OnUnregister(MistEngine& engine) = 0;
 
         virtual void OnInitialize() {}
-        virtual void OnDestroy() {}
+        virtual void OnPredestroy() {}
 
         virtual void OnUpdate() {}
 

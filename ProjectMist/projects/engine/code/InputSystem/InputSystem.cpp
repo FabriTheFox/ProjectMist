@@ -4,14 +4,14 @@
 
 namespace ME
 {
-    void InputSystem::Initialize()
+    void InputSystem::OnInitialize()
     {
         ResetInputStatus();
 
         Terminal::mEventSystem.RegisterListener(&InputSystem::OnWindowEvent, this);
     }
 
-    void InputSystem::Update()
+    void InputSystem::OnUpdate()
     {
         memcpy_s(&mPreviousKeyStatus.front(), Terminal::VIRTUAL_KEY_COUNT, &mCurrentKeyStatus.front(), Terminal::VIRTUAL_KEY_COUNT);
         memcpy_s(&mPreviousMouseStatus.front(), Terminal::MOUSE_BUTTON_COUNT, &mCurrentMouseStatus.front(), Terminal::MOUSE_BUTTON_COUNT);
@@ -68,7 +68,7 @@ namespace ME
         mCurrentMousePos[1] = Terminal::mMousePos[1];
     } 
 
-    void InputSystem::Shutdown()
+    void InputSystem::OnShutdown()
     {
         ResetInputStatus();
     }

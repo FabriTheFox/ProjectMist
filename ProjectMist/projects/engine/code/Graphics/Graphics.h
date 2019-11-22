@@ -23,9 +23,9 @@ namespace ME
         friend class RendererComp;
     public:
 
-        void Initialize() override final;
-        void Update() override final;
-        void Shutdown() override final;
+        void OnInitialize() override final;
+        void OnUpdate() override final;
+        void OnShutdown() override final;
 
         void Render();
 

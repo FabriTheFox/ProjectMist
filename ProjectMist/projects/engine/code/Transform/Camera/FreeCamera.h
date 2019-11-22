@@ -5,13 +5,18 @@
 
 namespace ME
 {
+    class MistEngine;
+
     class FreeCamera : public Camera
     {
     public:
-        MISTENGINE_DLL virtual void Update() override;
-        MISTENGINE_DLL virtual void HandleInput(const InputSystem& inputsystem) override;
+        MISTENGINE_DLL FreeCamera(MistEngine* engine = nullptr, const String& name = "");
+
+        MISTENGINE_DLL virtual void OnUpdate() override;
 
         float mSpeed = 0.01f;
+        float mLookSensitivity = 0.01f;
+        float mSpeedBoost = 5.f;
 
     private:
     };
