@@ -1,3 +1,5 @@
+#include "MistEngine_PCH.h"
+
 #include "Component.h"
 #include <EntitySystem/Entity/Entity.h>
 

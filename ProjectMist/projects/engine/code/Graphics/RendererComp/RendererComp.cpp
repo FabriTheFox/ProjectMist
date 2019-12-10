@@ -1,3 +1,5 @@
+#include "MistEngine_PCH.h"
+
 #include "RendererComp.h"
 
 #include <Graphics/DeviceResources.h>

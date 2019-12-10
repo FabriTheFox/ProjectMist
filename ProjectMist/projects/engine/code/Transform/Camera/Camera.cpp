@@ -1,3 +1,5 @@
+#include "MistEngine_PCH.h"
+
 #include <Transform/Camera/Camera.h>
 
 namespace ME

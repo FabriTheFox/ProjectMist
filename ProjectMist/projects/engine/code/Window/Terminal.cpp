@@ -1,3 +1,5 @@
+#include "MistEngine_PCH.h"
+
 #include "Terminal.h"
 #include <Windowsx.h>
 #include <iostream>

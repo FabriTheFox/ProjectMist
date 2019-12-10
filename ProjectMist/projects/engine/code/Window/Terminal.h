@@ -6,7 +6,6 @@
 #include <RTTI/RTTI.h>
 #include <EventSystem/EventSystem.h>
 
-#include <Windows.h>
 #include <WinUser.h>
 
 namespace ME

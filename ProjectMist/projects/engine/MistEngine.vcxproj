@@ -32,6 +32,12 @@
     <ClCompile Include="code\External\Imgui\imgui_impl_dx11.cpp" />
     <ClCompile Include="code\External\Imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="code\External\Imgui\imgui_widgets.cpp" />
+    <ClCompile Include="code\MistEngine_PCH.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="code\Transform\Camera\Camera.cpp" />
     <ClCompile Include="code\Graphics\DeviceResources.cpp" />
     <ClCompile Include="code\Graphics\Graphics.cpp" />
@@ -57,6 +63,7 @@
     <ClInclude Include="code\Engine\System\System.h" />
     <ClInclude Include="code\EventSystem\EventSystem.h" />
     <ClInclude Include="code\InputSystem\InputKeyCodes.h" />
+    <ClInclude Include="code\MistEngine_PCH.h" />
     <ClInclude Include="code\Transform\Camera\Camera.h" />
     <ClInclude Include="code\Graphics\DeviceResources.h" />
     <ClInclude Include="code\Graphics\Graphics.h" />
@@ -164,6 +171,9 @@
       <TreatWarningAsError>false</TreatWarningAsError>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>MistEngine_PCH.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)MistEngine_PCH.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <Link>
       <AdditionalDependencies>d3d11.lib;DirectXTK.lib;D3DCompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -179,6 +189,9 @@
       <TreatWarningAsError>false</TreatWarningAsError>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>MistEngine_PCH.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)MistEngine_PCH.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <Link>
       <AdditionalDependencies>d3d11.lib;DirectXTK.lib;D3DCompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -196,6 +209,9 @@
       <TreatWarningAsError>false</TreatWarningAsError>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>MistEngine_PCH.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)MistEngine_PCH.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -215,6 +231,9 @@
       <TreatWarningAsError>false</TreatWarningAsError>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>MistEngine_PCH.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)MistEngine_PCH.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

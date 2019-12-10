@@ -118,6 +118,8 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>MistEngine.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <AdditionalDependencies>MistEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>

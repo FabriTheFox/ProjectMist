@@ -1,5 +1,6 @@
+#include "MistEngine_PCH.h"
+
 #include "Graphics.h"
-#include <Windows.h>
 #include <Engine/MistEngine.h>
 #include <iostream>
 #include <Graphics/RendererComp/RendererComp.h>

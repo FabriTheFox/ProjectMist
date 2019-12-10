@@ -27,6 +27,7 @@
     <ClCompile Include="code\Window\Window.cpp" />
     <ClCompile Include="code\Transform\Camera\FreeCamera.cpp" />
     <ClCompile Include="code\EventSystem\EventSystem.cpp" />
+    <ClCompile Include="code\MistEngine_PCH.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Libraries\Containers.h" />
@@ -56,5 +57,6 @@
     <ClInclude Include="code\Window\Window.h" />
     <ClInclude Include="code\Transform\Camera\FreeCamera.h" />
     <ClInclude Include="code\InputSystem\InputKeyCodes.h" />
+    <ClInclude Include="code\MistEngine_PCH.h" />
   </ItemGroup>
 </Project>
