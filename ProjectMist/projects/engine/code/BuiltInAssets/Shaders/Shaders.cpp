@@ -6,6 +6,9 @@
 #include <Transform/Camera/Camera.h>
 
 #include <d3d11_4.h>
+#include <Effects.h>
+#include <PostProcess.h>
+#include <ScreenGrab.h>
 
 namespace ME
 {
@@ -70,5 +73,24 @@ namespace ME
 
         // Calling Draw tells Direct3D to start sending commands to the graphics device.
         context->DrawIndexed(comp->mModel->mVertexLayout->GetIndexCount(), 0, 0);
+
+        //DirectX::DebugEffect eff(dev->GetDevice());
+        //
+        //eff.SetAlpha(1.f);
+        //eff.SetMode(DirectX::DebugEffect::Mode::Mode_Normals);
+        //eff.SetVertexColorEnabled(true);
+        //eff.SetMatrices(
+        //    DirectX::XMMatrixTranspose(DirectX::XMLoadFloat4x4(&mVM.world)),
+        //    DirectX::XMMatrixTranspose(DirectX::XMLoadFloat4x4(&mVM.view)),
+        //    DirectX::XMMatrixTranspose(DirectX::XMLoadFloat4x4(&mVM.projection)));
+        //
+        //eff.Apply(dev->m_pd3dDeviceContext);
+        
+        DirectX::BasicPostProcess pp(dev->GetDevice());
+        
+        pp.SetEffect(DirectX::BasicPostProcess::Sepia);
+        pp.Process(dev->m_pd3dDeviceContext);
+
+        //DirectX::SaveDDSTextureToFile(dev->m_pd3dDeviceContext, dev->m_pBackBuffer, L"LMAO.dds");
     }
 }
