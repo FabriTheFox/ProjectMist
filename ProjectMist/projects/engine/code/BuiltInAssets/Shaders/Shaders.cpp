@@ -8,9 +8,6 @@
 #include <Transform/Camera/Camera.h>
 
 #include <d3d11_4.h>
-#include <Effects.h>
-#include <PostProcess.h>
-#include <ScreenGrab.h>
 
 namespace ME
 {
@@ -88,10 +85,10 @@ namespace ME
         //
         //eff.Apply(dev->m_pd3dDeviceContext);
         
-        DirectX::BasicPostProcess pp(dev->GetDevice());
-        
-        pp.SetEffect(DirectX::BasicPostProcess::Sepia);
-        pp.Process(dev->m_pd3dDeviceContext);
+        //DirectX::BasicPostProcess pp(dev->GetDevice());
+        //
+        //pp.SetEffect(DirectX::BasicPostProcess::Sepia);
+        //pp.Process(dev->m_pd3dDeviceContext);
 
         //DirectX::SaveDDSTextureToFile(dev->m_pd3dDeviceContext, dev->m_pBackBuffer, L"LMAO.dds");
     }

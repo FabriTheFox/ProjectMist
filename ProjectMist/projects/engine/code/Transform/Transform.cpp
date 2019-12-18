@@ -3,7 +3,6 @@
 #include "Transform.h"
 
 #include <d3d11_4.h>
-#include <SimpleMath.h>
 
 namespace ME
 {
@@ -16,9 +15,6 @@ namespace ME
 
     Mat4 Transform3D::GetMatrix()
     {
-        DirectX::SimpleMath::Rectangle r;
-        auto c = r.Center();
-
         Mat4 matrix;
 
         DirectX::XMStoreFloat4x4(&matrix, DirectX::XMMatrixTranspose(

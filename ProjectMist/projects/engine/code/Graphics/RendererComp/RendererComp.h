@@ -5,6 +5,8 @@
 #include <d3d11_4.h>
 #include <DirectXMath.h>
 
+#include <directxtk/inc/Effects.h>
+
 namespace ME
 {
     class DeviceResources;
@@ -23,12 +25,20 @@ namespace ME
         void OnDestroy();
         void OnUpdate();
 
-        void Render(DeviceResources* dev);
+        virtual void Render(DeviceResources* dev);
 
         Camera* mCamera = nullptr;
 
     public:
         Model* mModel = nullptr;
         ShaderProgram* mShader = nullptr;
+    };
+
+    // -----------------------------------------------------------------------------------------
+    class MISTENGINE_DLL BasicEffectRend : public RendererComp
+    {
+        RTTI_DECLARATION(BasicEffectRend);
+    public:
+        virtual void Render(DeviceResources* dev) override;
     };
 }

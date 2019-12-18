@@ -59,8 +59,8 @@ int main()
     en.mTransform.mPosition.x = 1;
     en2.mTransform.mPosition.x = -1;
 
-    en.AddComponent(ME::RendererComp::sGetRTTI());
-    auto& rcmp = en.GetComponent<ME::RendererComp>();
+    en.AddComponent(ME::BasicEffectRend::sGetRTTI());
+    auto& rcmp = en.GetComponent<ME::BasicEffectRend>();
     rcmp.mCamera = g.mCamera;
 
     en2.AddComponent(ME::RendererComp::sGetRTTI());

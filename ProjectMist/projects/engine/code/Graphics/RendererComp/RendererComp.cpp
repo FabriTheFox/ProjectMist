@@ -12,6 +12,11 @@
 #include <Graphics/Shader/Shader.h>
 #include <BuiltInAssets/Shaders/Shaders.h>
 #include <Graphics/VertexLayout/VertexLayout.h>
+#include "EntitySystem/Component/Component.h"
+#include "EntitySystem/EntitySystem.h"
+#include "EntitySystem/Entity/Entity.h"
+
+#include "Transform/Camera/Camera.h"
 
 namespace ME
 {
@@ -59,6 +64,36 @@ namespace ME
     void RendererComp::Render(DeviceResources* dev)
     {
         mShader->Draw(dev, this);
+    }
+
+    // -----------------------------------------------------------------------------------------
+    RTTI_IMPLEMENTATION(BasicEffectRend);
+
+    void BasicEffectRend::Render(DeviceResources* dev)
+    {
+        DirectX::BasicEffect be(dev->m_pd3dDevice);
+
+        be.SetDiffuseColor({1, 0, 0, 1});
+        be.SetEmissiveColor({ {0, 0, 0, 1} });
+        be.SetSpecularColor({ 0, 0, 0, 1 });
+        be.SetSpecularPower(1.f);
+        be.DisableSpecular();
+        be.SetAlpha(1.f);
+
+        be.SetLightingEnabled(false);
+        be.SetPerPixelLighting(false);
+        be.SetAmbientLightColor({ 1, 1, 1, 1 });
+
+        auto world = GetOwner()->mTransform.GetMatrix();
+        be.SetWorld(DirectX::XMMatrixTranspose(DirectX::XMLoadFloat4x4(&world)));
+
+        auto view = mCamera->GetViewMatrix();
+        be.SetView(DirectX::XMMatrixTranspose(DirectX::XMLoadFloat4x4(&view)));
+
+        auto proj = mCamera->GetProjectionMatrix();
+        be.SetProjection(DirectX::XMMatrixTranspose(DirectX::XMLoadFloat4x4(&proj)));
+
+        be.Apply(dev->m_pd3dDeviceContext);
     }
 }
 
