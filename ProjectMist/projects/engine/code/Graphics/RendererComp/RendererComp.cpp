@@ -28,19 +28,19 @@ namespace ME
     {
         engine.Graphics.RegisterComponent(this);
 
-        mModel = new Model;
-        mShader = new ColorShader();
-
-        mModel->Create(engine.Graphics.mDeviceResources.m_pd3dDevice);
-
-        auto* vs = new VertexShader();
-        auto* ps = new PixelShader();
-        vs->Create(engine.Graphics.mDeviceResources.m_pd3dDevice, "", mModel->mVertexLayout);
-        ps->Create(engine.Graphics.mDeviceResources.m_pd3dDevice, "");
-
-        mShader->SetVertexShader(vs);
-        mShader->SetPixelShader(ps);
-        mShader->CreateConstantBuffers(engine.Graphics.mDeviceResources.m_pd3dDevice);
+        //mModel = new Model;
+        //mShader = new ColorShader();
+        //
+        //mModel->Create(engine.Graphics.mDeviceResources.m_pd3dDevice);
+        //
+        //auto* vs = new VertexShader();
+        //auto* ps = new PixelShader();
+        //vs->Create(engine.Graphics.mDeviceResources.m_pd3dDevice, "", mModel->mVertexLayout);
+        //ps->Create(engine.Graphics.mDeviceResources.m_pd3dDevice, "");
+        //
+        //mShader->SetVertexShader(vs);
+        //mShader->SetPixelShader(ps);
+        //mShader->CreateConstantBuffers(engine.Graphics.mDeviceResources.m_pd3dDevice);
     }
 
     void RendererComp::OnUnregister(MistEngine& engine)

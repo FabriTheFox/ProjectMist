@@ -31,7 +31,7 @@ namespace ME
 
         Camera* mCamera;
 
-    private:
+    //private:
         void RegisterComponent(RendererComp* renderer);
         CompPointerVector mRenderables;
 

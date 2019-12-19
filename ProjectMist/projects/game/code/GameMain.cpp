@@ -18,6 +18,9 @@
 
 #include <Transform/Camera/Camera.h>
 #include <Transform/Camera/FreeCamera.h>
+#include "Graphics/Model/Model.h"
+#include "Graphics/Shader/Shader.h"
+#include "BuiltInAssets/Shaders/Shaders.h"
 
 class lmao
 {
@@ -59,13 +62,34 @@ int main()
     en.mTransform.mPosition.x = 1;
     en2.mTransform.mPosition.x = -1;
 
-    en.AddComponent(ME::BasicEffectRend::sGetRTTI());
-    auto& rcmp = en.GetComponent<ME::BasicEffectRend>();
+
+    ME::Model* cube = new ME::Model;
+    ME::ShaderProgram* colorshader = new ME::ColorShader();
+    {
+        cube->Create(e.Graphics.mDeviceResources.m_pd3dDevice);
+
+        auto* vs = new ME::VertexShader();
+        auto* ps = new ME::PixelShader();
+
+        vs->Create(e.Graphics.mDeviceResources.m_pd3dDevice, "", cube->mVertexLayout);
+        ps->Create(e.Graphics.mDeviceResources.m_pd3dDevice, "");
+
+        colorshader->SetVertexShader(vs);
+        colorshader->SetPixelShader(ps);
+        colorshader->CreateConstantBuffers(e.Graphics.mDeviceResources.m_pd3dDevice);
+    }
+
+    en.AddComponent(ME::RendererComp::sGetRTTI());
+    auto& rcmp = en.GetComponent<ME::RendererComp>();
     rcmp.mCamera = g.mCamera;
+    rcmp.mModel = cube;
+    rcmp.mShader = colorshader;
 
     en2.AddComponent(ME::RendererComp::sGetRTTI());
     auto& rcmp2 = en2.GetComponent<ME::RendererComp>();
     rcmp2.mCamera = g.mCamera;
+    rcmp2.mModel = cube;
+    rcmp2.mShader = colorshader;
 
     while (true)
     {

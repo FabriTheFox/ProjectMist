@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Engine/MistEngineDefs.h>
 #include <Libraries/Containers.h>
 
 struct ID3D11Device;
@@ -17,7 +18,7 @@ namespace ME
     class VertexShader;
     class PixelShader;
 
-    class ShaderProgram
+    class MISTENGINE_DLL ShaderProgram
     {
     public:
         virtual void CreateConstantBuffers(ID3D11Device* dev) = 0;
@@ -34,7 +35,7 @@ namespace ME
         PixelShader* mPixelShader = nullptr;
     };
 
-    class VertexShader
+    class MISTENGINE_DLL VertexShader
     {
     public:
         void Create(ID3D11Device* dev, const ME::String& file, const IVertexLayout* verlay);
@@ -49,7 +50,7 @@ namespace ME
         ID3D11InputLayout* m_pInputLayoutExtended = nullptr;
     };
 
-    class PixelShader
+    class MISTENGINE_DLL PixelShader
     {
     public:
         void Create(ID3D11Device* dev, const ME::String& file);
