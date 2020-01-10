@@ -28,6 +28,8 @@
     <ClCompile Include="code\Transform\Camera\FreeCamera.cpp" />
     <ClCompile Include="code\EventSystem\EventSystem.cpp" />
     <ClCompile Include="code\MistEngine_PCH.cpp" />
+    <ClCompile Include="code\AssetSystem\AssetSystem.cpp" />
+    <ClCompile Include="code\AssetSystem\Assets\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Libraries\Containers.h" />
@@ -58,5 +60,7 @@
     <ClInclude Include="code\Transform\Camera\FreeCamera.h" />
     <ClInclude Include="code\InputSystem\InputKeyCodes.h" />
     <ClInclude Include="code\MistEngine_PCH.h" />
+    <ClInclude Include="code\AssetSystem\AssetSystem.h" />
+    <ClInclude Include="code\AssetSystem\Assets\Texture.h" />
   </ItemGroup>
 </Project>

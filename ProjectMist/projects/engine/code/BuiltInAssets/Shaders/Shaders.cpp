@@ -49,6 +49,13 @@ namespace ME
         // Set up the pixel shader stage.
         context->PSSetShader(mPixelShader->GetPixelShader(), nullptr, 0);
 
+        // Set texture and sampler.
+        auto sampler = dev->mCoolSampler;
+        context->PSSetSamplers(0, 1, &sampler);
+
+        auto texture = dev->mCoolTexture;
+        context->PSSetShaderResources(0, 1, &texture);
+
         // Calling Draw tells Direct3D to start sending commands to the graphics device.
         context->DrawIndexed(comp->mModel->mVertexLayout->GetIndexCount(), 0, 0);
     }
@@ -91,6 +98,13 @@ namespace ME
 
         // Set up the pixel shader stage.
         context->PSSetShader(mPixelShader->GetPixelShader(), nullptr, 0);
+
+        // Set texture and sampler.
+        auto sampler = dev->mCoolSampler;
+        context->PSSetSamplers(0, 1, &sampler);
+
+        auto texture = dev->mCoolTexture;
+        context->PSSetShaderResources(0, 1, &texture);
 
         // Calling Draw tells Direct3D to start sending commands to the graphics device.
         context->DrawIndexed(comp->mModel->mVertexLayout->GetIndexCount(), 0, 0);

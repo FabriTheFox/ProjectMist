@@ -33,12 +33,3 @@ VS_OUTPUT VS(float4 Pos : POSITION, float4 Color : COLOR)
     output.Color = Color;
     return output;
 }
-
-
-//--------------------------------------------------------------------------------------
-// Pixel Shader
-//--------------------------------------------------------------------------------------
-float4 PS(VS_OUTPUT input) : SV_Target
-{
-    return input.Color;
-}

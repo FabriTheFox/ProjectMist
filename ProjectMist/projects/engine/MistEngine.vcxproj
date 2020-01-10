@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="code\AssetSystem\AssetSystem.cpp" />
+    <ClCompile Include="code\AssetSystem\Assets\Texture.cpp" />
     <ClCompile Include="code\BuiltInAssets\Shaders\Shaders.cpp" />
     <ClCompile Include="code\EntitySystem\Component\Component.cpp" />
     <ClCompile Include="code\EntitySystem\EntitySystem.cpp" />
@@ -53,6 +55,8 @@
     <ClCompile Include="code\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="code\AssetSystem\AssetSystem.h" />
+    <ClInclude Include="code\AssetSystem\Assets\Texture.h" />
     <ClInclude Include="code\BuiltInAssets\Shaders\Shaders.h" />
     <ClInclude Include="code\Engine\ClassQualifiers\ClassQualifiers.h" />
     <ClInclude Include="code\EntitySystem\Component\Component.h" />

@@ -4,6 +4,7 @@
 #include <memory>
 
 #include "DeviceResources.h"
+#include <AssetSystem/Assets/Texture.h>
 
 namespace ME
 {
@@ -69,6 +70,50 @@ namespace ME
         // Store pointers to the Direct3D 11.1 API device and immediate context.
         m_pd3dDevice = device;
         m_pd3dDeviceContext = context;
+
+        // ============================================================================
+        
+        // Create sampler.
+        D3D11_SAMPLER_DESC samplerDesc = {};
+        samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+        samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+        samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+        samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+        samplerDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+        samplerDesc.MinLOD = 0;
+        samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
+
+        HRESULT res = device->CreateSamplerState(&samplerDesc, &mCoolSampler);
+
+        // Create texture.
+        D3D11_TEXTURE2D_DESC txtDesc = {};
+        txtDesc.MipLevels = txtDesc.ArraySize = 1;
+        txtDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM_SRGB; // sunset.jpg is in sRGB colorspace
+        txtDesc.SampleDesc.Count = 1;
+        txtDesc.Usage = D3D11_USAGE_IMMUTABLE;
+        txtDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+
+        txtDesc.Width = 2; 
+        txtDesc.Height = 2;
+
+        std::vector<uint8_t> image = {
+            255, 0, 0, 255,
+            0, 255, 0, 255,
+            0, 0, 255, 255,
+            255, 255, 255, 255,
+        };
+
+        //Texture tx;
+        //auto image = tx.LoadBGRAImage(L"sunset.jpg", txtDesc.Width, txtDesc.Height);
+
+        D3D11_SUBRESOURCE_DATA initialData = {};
+
+        initialData.pSysMem = image.data();
+        initialData.SysMemPitch = txtDesc.Width * sizeof(uint32_t);
+
+        ID3D11Texture2D* tex;
+        res = device->CreateTexture2D(&txtDesc, &initialData, &tex);
+        res = device->CreateShaderResourceView(tex, nullptr, &mCoolTexture);
 
         return hr;
     }

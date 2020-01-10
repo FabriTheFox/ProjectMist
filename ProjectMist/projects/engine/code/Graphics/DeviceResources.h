@@ -29,6 +29,8 @@ namespace ME
         void Present();
 
         //private:
+        ID3D11SamplerState* mCoolSampler;
+        ID3D11ShaderResourceView* mCoolTexture;
 
         //-----------------------------------------------------------------------------
         // Direct3D device
