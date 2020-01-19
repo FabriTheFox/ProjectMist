@@ -30,6 +30,7 @@
     <ClCompile Include="code\MistEngine_PCH.cpp" />
     <ClCompile Include="code\AssetSystem\AssetSystem.cpp" />
     <ClCompile Include="code\AssetSystem\Assets\Texture.cpp" />
+    <ClCompile Include="code\Utilities\StringUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Libraries\Containers.h" />
@@ -62,5 +63,6 @@
     <ClInclude Include="code\MistEngine_PCH.h" />
     <ClInclude Include="code\AssetSystem\AssetSystem.h" />
     <ClInclude Include="code\AssetSystem\Assets\Texture.h" />
+    <ClInclude Include="code\Utilities\StringUtils.h" />
   </ItemGroup>
 </Project>

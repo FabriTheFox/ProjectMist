@@ -6,13 +6,27 @@
 
 namespace ME
 {
-    class Texture
+    class AssetHandlerBase : public IDynamic
     {
+        RTTI_DECLARATION(AssetHandlerBase);
     public:
-
     };
 
-    class AssetSystem : public System
+    template <typename T>
+    class AssetHandler : public AssetHandlerBase
+    {
+        RTTI_DECLARATION(AssetHandler<T>);
+    public:
+        
+    };
+
+    class Asset : public IDynamic
+    {
+    public:
+        virtual void Load(const String& path) = 0;
+    };
+
+    class MISTENGINE_DLL AssetSystem : public System
     {
         SYSTEM_DECLARATION(AssetSystem);
 
@@ -20,10 +34,26 @@ namespace ME
         void OnInitialize() override final;
         void OnUpdate() override final;
 
-        void LoadTexture(const String& path, const String& name);
-        const Texture& GetTexture(const String& name);
+        template <typename T>
+        void LoadAsset(const String& name, const String& path)
+        {
+            auto& assetmap = mAssets[T::sGetRTTI()];
+            auto& asset = assetmap[name];
+            asset = std::make_shared<T>();
+            asset->Load(path);
+        }
+
+        template <typename T>
+        T& GetAsset(const String& name)
+        {
+            auto& assetmap = mAssets[T::sGetRTTI()];
+            return *(PTR_CAST(T)(assetmap[name]));
+        }
 
     private:
-        UnorderedMap<String, Texture> mTextures;
+        using AssetMap = UnorderedMap<String, SPtr<Asset>>;
+        UnorderedMap<ME::RTTI, AssetMap> mAssets;
     };
+
+    RTTI_IMPLEMENTATION_TEMPLATE(AssetHandler, T);
 }

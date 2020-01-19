@@ -51,6 +51,7 @@
     <ClCompile Include="code\InputSystem\InputSystem.cpp" />
     <ClCompile Include="code\Transform\Camera\FreeCamera.cpp" />
     <ClCompile Include="code\Transform\Transform.cpp" />
+    <ClCompile Include="code\Utilities\StringUtils.cpp" />
     <ClCompile Include="code\Window\Terminal.cpp" />
     <ClCompile Include="code\Window\Window.cpp" />
   </ItemGroup>
@@ -83,6 +84,7 @@
     <ClInclude Include="code\Transform\Camera\FreeCamera.h" />
     <ClInclude Include="code\Transform\Transform.h" />
     <ClInclude Include="code\RTTI\RTTI.h" />
+    <ClInclude Include="code\Utilities\StringUtils.h" />
     <ClInclude Include="code\Window\Terminal.h" />
     <ClInclude Include="code\Window\Window.h" />
   </ItemGroup>

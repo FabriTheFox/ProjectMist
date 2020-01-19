@@ -6,6 +6,9 @@
 #include <Graphics/RendererComp/RendererComp.h>
 #include <EntitySystem/Entity/Entity.h>
 #include <Transform/Camera/Camera.h>
+#include <engine/MistEngine.h>
+#include <AssetSystem/AssetSystem.h>
+#include <AssetSystem/Assets/Texture.h>
 
 #include <d3d11_4.h>
 
@@ -49,12 +52,24 @@ namespace ME
         // Set up the pixel shader stage.
         context->PSSetShader(mPixelShader->GetPixelShader(), nullptr, 0);
 
+        auto& tex = MistEngine::Get().AssetSystem.GetAsset<ME::Texture>("Liya");
+        auto& tex2 = MistEngine::Get().AssetSystem.GetAsset<ME::Texture>("Sunset");
+
+        if (!tex.mLoadedToGraphicsDevice)
+            tex.LoadToGraphicsDevice(dev->m_pd3dDevice);
+
+        if (!tex2.mLoadedToGraphicsDevice)
+            tex2.LoadToGraphicsDevice(dev->m_pd3dDevice);
+
         // Set texture and sampler.
-        auto sampler = dev->mCoolSampler;
+        auto sampler = tex.mSamplerState;
         context->PSSetSamplers(0, 1, &sampler);
 
-        auto texture = dev->mCoolTexture;
+        auto texture = tex.mTexture;
         context->PSSetShaderResources(0, 1, &texture);
+
+        auto texture2 = tex2.mTexture;
+        context->PSSetShaderResources(1, 1, &texture2);
 
         // Calling Draw tells Direct3D to start sending commands to the graphics device.
         context->DrawIndexed(comp->mModel->mVertexLayout->GetIndexCount(), 0, 0);

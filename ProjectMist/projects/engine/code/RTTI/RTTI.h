@@ -3,6 +3,7 @@
 #include <Libraries/Containers.h>
 #include <Libraries/Memory.h>
 
+// Needs to inherit from IDynamic. Do not use with abstract classes
 #define RTTI_DECLARATION(thistype)																        \
 	public:																						        \
 	virtual const ME::RTTI& GetRTTI() const {return sm_RTTI;}									        \

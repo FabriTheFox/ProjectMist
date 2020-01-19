@@ -22,31 +22,12 @@
 #include "Graphics/Shader/Shader.h"
 #include "BuiltInAssets/Shaders/Shaders.h"
 
-class lmao
-{
-public:
-    float r;
-};
-
-class A
-{
-public:
-    int a;
-    static constexpr lmao lm{};
-};
-
-class B : public A
-{
-public:
-    int b;
-};
+#include <AssetSystem/AssetSystem.h>
+#include <AssetSystem/Assets/Texture.h>
 
 int main()
 {
-    A aa = A();
-    float rrr = aa.lm.r;
-
-    ME::MistEngine e;
+    ME::MistEngine& e = ME::MistEngine::Get();
     e.Initialize();
 
     auto& t = e.Window;
@@ -90,6 +71,9 @@ int main()
     rcmp2.mCamera = g.mCamera;
     rcmp2.mModel = cube;
     rcmp2.mShader = colorshader;
+
+    e.AssetSystem.LoadAsset<ME::Texture>("Liya", "wallpaper.jpg");
+    e.AssetSystem.LoadAsset<ME::Texture>("Sunset", "benny.png");
 
     while (true)
     {

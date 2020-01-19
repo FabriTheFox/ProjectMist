@@ -12,6 +12,8 @@ struct VS_OUTPUT
 };
 
 Texture2D txDiffuse : register(t0);
+Texture2D txDiffuse1 : register(t1);
+
 SamplerState samLinear : register(s0);
 
 //--------------------------------------------------------------------------------------
@@ -20,6 +22,9 @@ SamplerState samLinear : register(s0);
 float4 PS(VS_OUTPUT input) : SV_Target
 {
     float2 uv = input.Color.xy;
-    //return float4(uv, 0, 1);
-    return txDiffuse.Sample(samLinear, input.Color.xy * 10);
+    
+    float4 tx0 = txDiffuse.Sample(samLinear, input.Color.xy);
+    //float4 tx1 = txDiffuse1.Sample(samLinear, input.Color.xy);
+
+    return tx0;
 }

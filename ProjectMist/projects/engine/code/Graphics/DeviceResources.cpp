@@ -74,7 +74,7 @@ namespace ME
         // ============================================================================
         
         // Create sampler.
-        D3D11_SAMPLER_DESC samplerDesc = {};
+        /*D3D11_SAMPLER_DESC samplerDesc = {};
         samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
         samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
         samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -96,15 +96,15 @@ namespace ME
         txtDesc.Width = 2; 
         txtDesc.Height = 2;
 
-        std::vector<uint8_t> image = {
-            255, 0, 0, 255,
-            0, 255, 0, 255,
-            0, 0, 255, 255,
-            255, 255, 255, 255,
-        };
+        //std::vector<uint8_t> image = {
+        //    255, 0, 0, 255,
+        //    0, 255, 0, 255,
+        //    0, 0, 255, 255,
+        //    255, 255, 255, 255,
+        //};
 
-        //Texture tx;
-        //auto image = tx.LoadBGRAImage(L"sunset.jpg", txtDesc.Width, txtDesc.Height);
+        Texture tx;
+        auto image = tx.LoadBGRAImage(L"gatogata.jpg", txtDesc.Width, txtDesc.Height);
 
         D3D11_SUBRESOURCE_DATA initialData = {};
 
@@ -113,7 +113,7 @@ namespace ME
 
         ID3D11Texture2D* tex;
         res = device->CreateTexture2D(&txtDesc, &initialData, &tex);
-        res = device->CreateShaderResourceView(tex, nullptr, &mCoolTexture);
+        res = device->CreateShaderResourceView(tex, nullptr, &mCoolTexture);*/
 
         return hr;
     }

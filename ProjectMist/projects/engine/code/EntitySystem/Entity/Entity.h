@@ -43,7 +43,7 @@ namespace ME
     public:
         Transform3D mTransform;
 
-    protected:
+    //protected:
         MistEngine* mEngine{ nullptr };
 
     private:

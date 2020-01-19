@@ -14,15 +14,6 @@ namespace ME
 
     }
 
-    void AssetSystem::LoadTexture(const String& path, const String& name)
-    {
-
-    }
-
-    const Texture& AssetSystem::GetTexture(const String& name)
-    {
-        return mTextures["lmao"];
-    }
-
+    RTTI_IMPLEMENTATION(AssetHandlerBase);
 }
 

@@ -2,19 +2,30 @@
 
 #include <d3d11_4.h>
 #include <vector>
+#include <AssetSystem/AssetSystem.h>
 
 namespace ME
 {
-    class Texture
+    class MISTENGINE_DLL Texture : public Asset
     {
-    public:
-        //bool Initialize(ID3D11Device*, WCHAR*);
-        //ID3D11ShaderResourceView* GetTexture();
+        RTTI_DECLARATION(Texture);
+         
 
-        std::vector<uint8_t> LoadBGRAImage(const wchar_t* filename, uint32_t& width, uint32_t& height);
+    public:
+        void Load(const String& path) override;
+        void LoadBGRAImage(const String& path);
+
+        void LoadToGraphicsDevice(ID3D11Device* device);
 
     //private:
 
-        ID3D11ShaderResourceView* m_texture;
+        bool mLoadedToGraphicsDevice = false;
+
+        unsigned mWidth = 0;
+        unsigned mHeight = 0;
+
+        std::vector<uint8_t> mTextureData;
+        ID3D11SamplerState* mSamplerState = nullptr;
+        ID3D11ShaderResourceView* mTexture = nullptr;
     };
 }

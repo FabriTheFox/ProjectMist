@@ -4,11 +4,18 @@
 
 namespace ME
 {
+    MistEngine& MistEngine::Get()
+    {
+        static MistEngine engine;
+        return engine;
+    }
+
     MistEngine::MistEngine() 
         : Window(*this)
         , Graphics(*this)
         , EntitySystem(*this)
         , InputSystem(*this)
+        , AssetSystem(*this)
     {
     }
 
@@ -18,6 +25,7 @@ namespace ME
         Graphics.OnInitialize();
         EntitySystem.OnInitialize();
         InputSystem.OnInitialize();
+        AssetSystem.OnInitialize();
     }
 
     void MistEngine::Update()
@@ -37,5 +45,6 @@ namespace ME
         EntitySystem.OnShutdown();
         Graphics.OnShutdown();
         Window.OnShutdown();
+        AssetSystem.OnShutdown();
     }
 }
