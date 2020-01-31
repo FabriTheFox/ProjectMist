@@ -14,6 +14,6 @@ namespace ME
 
     }
 
-    RTTI_IMPLEMENTATION(AssetHandlerBase);
+    RTTI_IMPLEMENTATION(AssetRefBase);
 }
 

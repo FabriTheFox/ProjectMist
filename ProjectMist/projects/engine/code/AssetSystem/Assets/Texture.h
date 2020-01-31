@@ -2,7 +2,8 @@
 
 #include <d3d11_4.h>
 #include <vector>
-#include <AssetSystem/AssetSystem.h>
+#include <AssetSystem/Asset.h>
+#include <Engine/MistEngineDefs.h>
 
 namespace ME
 {
@@ -10,15 +11,10 @@ namespace ME
     {
         RTTI_DECLARATION(Texture);
          
-
     public:
-        void Load(const String& path) override;
-        void LoadBGRAImage(const String& path);
-
         void LoadToGraphicsDevice(ID3D11Device* device);
 
     //private:
-
         bool mLoadedToGraphicsDevice = false;
 
         unsigned mWidth = 0;

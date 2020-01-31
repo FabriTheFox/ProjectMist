@@ -31,6 +31,8 @@
     <ClCompile Include="code\AssetSystem\AssetSystem.cpp" />
     <ClCompile Include="code\AssetSystem\Assets\Texture.cpp" />
     <ClCompile Include="code\Utilities\StringUtils.cpp" />
+    <ClCompile Include="code\BuiltInAssets\PrimitiveMeshes\PrimitiveMeshes.cpp" />
+    <ClCompile Include="code\AssetSystem\AssetLoaders\Texture\TextureLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Libraries\Containers.h" />
@@ -64,5 +66,9 @@
     <ClInclude Include="code\AssetSystem\AssetSystem.h" />
     <ClInclude Include="code\AssetSystem\Assets\Texture.h" />
     <ClInclude Include="code\Utilities\StringUtils.h" />
+    <ClInclude Include="code\BuiltInAssets\PrimitiveMeshes\PrimitiveMeshes.h" />
+    <ClInclude Include="code\AssetSystem\AssetLoaders\AsyncAssetLoader.h" />
+    <ClInclude Include="code\AssetSystem\AssetLoaders\AssetLoaderDefs.h" />
+    <ClInclude Include="code\AssetSystem\Asset.h" />
   </ItemGroup>
 </Project>

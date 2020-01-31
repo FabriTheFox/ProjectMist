@@ -3,27 +3,22 @@
 #include <Engine/MistEngineDefs.h>
 #include <RTTI/RTTI.h>
 #include <Engine/System/System.h>
+#include <AssetSystem/AssetLoaders/AsyncAssetLoader.h>
 
 namespace ME
 {
-    class AssetHandlerBase : public IDynamic
+    class AssetRefBase : public IDynamic
     {
-        RTTI_DECLARATION(AssetHandlerBase);
+        RTTI_DECLARATION(AssetRefBase);
     public:
     };
 
     template <typename T>
-    class AssetHandler : public AssetHandlerBase
+    class AssetRef: public AssetRefBase
     {
-        RTTI_DECLARATION(AssetHandler<T>);
+        RTTI_DECLARATION(AssetRef<T>);
     public:
-        
-    };
-
-    class Asset : public IDynamic
-    {
-    public:
-        virtual void Load(const String& path) = 0;
+	private:
     };
 
     class MISTENGINE_DLL AssetSystem : public System
@@ -34,26 +29,38 @@ namespace ME
         void OnInitialize() override final;
         void OnUpdate() override final;
 
+
+
         template <typename T>
         void LoadAsset(const String& name, const String& path)
         {
             auto& assetmap = mAssets[T::sGetRTTI()];
-            auto& asset = assetmap[name];
-            asset = std::make_shared<T>();
-            asset->Load(path);
+			AsyncAssetLoader& assetloader = assetmap[name];
+
+			assetloader.SetDefaultAsset(nullptr);
+			assetloader.Load<T>(*(new T()), path);
         }
 
         template <typename T>
         T& GetAsset(const String& name)
         {
             auto& assetmap = mAssets[T::sGetRTTI()];
-            return *(PTR_CAST(T)(assetmap[name]));
+			AsyncAssetLoader& assetloader = assetmap[name];
+
+            return *(static_cast<T*>(assetloader.GetAsset()));
         }
 
     private:
-        using AssetMap = UnorderedMap<String, SPtr<Asset>>;
+		void LoadBuiltInAssets()
+		{
+
+		}
+
+        using AssetMap = UnorderedMap<String, AsyncAssetLoader>;
         UnorderedMap<ME::RTTI, AssetMap> mAssets;
+
+		UnorderedMap<ME::RTTI, SPtr<Asset>> mDefaultAssets;
     };
 
-    RTTI_IMPLEMENTATION_TEMPLATE(AssetHandler, T);
+    RTTI_IMPLEMENTATION_TEMPLATE(AssetRef, T);
 }
